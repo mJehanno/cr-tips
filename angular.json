@@ -24,9 +24,17 @@
             "tsConfig": "apps/cr-tips/tsconfig.app.json",
             "assets": [
               "apps/cr-tips/src/favicon.ico",
-              "apps/cr-tips/src/assets"
+              "apps/cr-tips/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
-            "styles": ["apps/cr-tips/src/styles.scss"],
+            "styles": [
+              "apps/cr-tips/src/theme.less",
+              "apps/cr-tips/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -80,7 +88,10 @@
               "apps/cr-tips/tsconfig.app.json",
               "apps/cr-tips/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/cr-tips/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/cr-tips/**"
+            ]
           }
         },
         "test": {
@@ -115,7 +126,10 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/cr-tips-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**", "!apps/cr-tips-e2e/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/cr-tips-e2e/**"
+            ]
           }
         }
       }
