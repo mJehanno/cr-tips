@@ -1,0 +1,141 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "cr-tips": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/workspace:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/cr-tips",
+      "sourceRoot": "apps/cr-tips/src",
+      "prefix": "cr-tips",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/cr-tips",
+            "index": "apps/cr-tips/src/index.html",
+            "main": "apps/cr-tips/src/main.ts",
+            "polyfills": "apps/cr-tips/src/polyfills.ts",
+            "tsConfig": "apps/cr-tips/tsconfig.app.json",
+            "assets": [
+              "apps/cr-tips/src/favicon.ico",
+              "apps/cr-tips/src/assets"
+            ],
+            "styles": ["apps/cr-tips/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/cr-tips/src/environments/environment.ts",
+                  "with": "apps/cr-tips/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "cr-tips:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "cr-tips:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "cr-tips:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/cr-tips/tsconfig.app.json",
+              "apps/cr-tips/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/cr-tips/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/cr-tips/jest.config.js",
+            "tsConfig": "apps/cr-tips/tsconfig.spec.json",
+            "setupFile": "apps/cr-tips/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "cr-tips-e2e": {
+      "root": "apps/cr-tips-e2e",
+      "sourceRoot": "apps/cr-tips-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/cr-tips-e2e/cypress.json",
+            "tsConfig": "apps/cr-tips-e2e/tsconfig.e2e.json",
+            "devServerTarget": "cr-tips:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cr-tips:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/cr-tips-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**", "!apps/cr-tips-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "cr-tips"
+}
