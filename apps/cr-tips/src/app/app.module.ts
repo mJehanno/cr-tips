@@ -10,12 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { AuthModule } from './modules/auth/auth.module';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, IconsProviderModule, NgZorroAntdModule, FormsModule, HttpClientModule, BrowserAnimationsModule],
+  imports: [BrowserModule, AppRoutingModule, IconsProviderModule, NgZorroAntdModule, FormsModule, HttpClientModule, BrowserAnimationsModule, AuthModule],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
   bootstrap: [AppComponent]
 })

@@ -45,8 +45,8 @@
             ></i>
         </span>
         <div class="button-header">
-          <button nz-button>Login</button>
-          <button nz-button>Register</button>
+          <button nz-button (click)="showLoginModal()">Login</button>
+          <button nz-button (click)="showRegisterModal()">Register</button>
         </div>
       </div>
     </nz-header>
@@ -57,3 +57,6 @@
     </nz-content>
   </nz-layout>
 </nz-layout>
+<nz-modal [(nzVisible)]="isRegisterVisible" nzWidth="600px" nzTitle="Register" (nzOnCancel)="handleRegisterCancel()" (nzOnOk)="handleRegisterOk()">
+  <cr-tips-register-dialog></cr-tips-register-dialog>
+</nz-modal>
