@@ -20,7 +20,10 @@ export class RegisterDialogComponent implements OnInit {
   createRegisterForm() {
     return this.fb.group({
       email: [''],
-      password: ['']
+      password: [''],
+      checkPassword: [''],
+      nickname: [''],
+      ign: ['']
     });
   }
 

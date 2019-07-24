@@ -60,3 +60,6 @@
 <nz-modal [(nzVisible)]="isRegisterVisible" nzWidth="600px" nzTitle="Register" (nzOnCancel)="handleRegisterCancel()" (nzOnOk)="handleRegisterOk()">
   <cr-tips-register-dialog></cr-tips-register-dialog>
 </nz-modal>
+<nz-modal [(nzVisible)]="isLoginVisible" nzWidth="600px" nzTitle="Login" (nzOnCancel)="handleLoginCancel()" (nzOnOk)="handleLoginOk()">
+    <cr-tips-login-dialog></cr-tips-login-dialog>
+</nz-modal>

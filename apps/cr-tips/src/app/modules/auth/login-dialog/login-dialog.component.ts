@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'cr-tips-login-dialog',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
+
+  validateForm: FormGroup;
 
   ngOnInit() {
+    this.validateForm = this.createLoginForm();
   }
+
+  createLoginForm() {
+    return this.fb.group({
+      email: [''],
+      password: ['']
+    });
+  }
+
+  submitForm() {
+
+  }
+
 
 }
