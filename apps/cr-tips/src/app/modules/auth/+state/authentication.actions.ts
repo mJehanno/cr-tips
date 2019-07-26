@@ -31,7 +31,6 @@ export class Logged implements Action {
 
 export class Logout implements Action {
   readonly type = AuthenticationActionTypes.Logout;
-  constructor(public payload: Entity[]) {}
 }
 
 export type AuthenticationAction =

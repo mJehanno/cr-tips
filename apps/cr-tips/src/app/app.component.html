@@ -50,7 +50,7 @@
         <div class="button-header">
           <button nz-button (click)="showLoginModal()" *ngIf="!userLogged">Login</button>
           <button nz-button (click)="showRegisterModal()" *ngIf="!userLogged">Register</button>
-          <button nz-button (click)="Logout()" *ngIf="userLogged">Log Out</button>
+          <button nz-button (click)="logout()" *ngIf="userLogged">Log Out</button>
         </div>
       </div>
     </nz-header>

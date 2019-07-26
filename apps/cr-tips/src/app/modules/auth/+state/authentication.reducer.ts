@@ -42,6 +42,8 @@ export function authenticationReducer(
     case AuthenticationActionTypes.Logged:
       return {...state, user : action.payload}
     break;
+    case AuthenticationActionTypes.Logout:
+      return {...state, user: null}
     default:
       return state;
 

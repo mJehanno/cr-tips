@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { AuthenticationPartialState } from './authentication.reducer';
 import { authenticationQuery } from './authentication.selectors';
-import { Register, Logged } from './authentication.actions';
+import { Register, Logged, Logout } from './authentication.actions';
 import { from, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '@cr-tips/data';
@@ -31,6 +31,10 @@ export class AuthenticationFacade {
 
   public userLogged(user: User){
     this.store.dispatch(new Logged(user) )
+  }
+
+  public logout() {
+    this.store.dispatch(new Logout());
   }
 
 }
