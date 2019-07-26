@@ -6,7 +6,8 @@ export enum AuthenticationActionTypes {
   Register = '[Authentication] Load Authentication',
   Login = '[Authentication] Authentication Loaded',
   Logout = '[Authentication] Authentication Load Error',
-  Registered = '[Authentication] Authentication Load Error'
+  Registered = '[Authentication] Authentication Load Error',
+  Logged = ""
 }
 
 export class Register implements Action {
@@ -23,6 +24,11 @@ export class Login implements Action {
   constructor(public payload: any) {}
 }
 
+export class Logged implements Action {
+  readonly type = AuthenticationActionTypes.Logged;
+  constructor(public payload: User) {}
+}
+
 export class Logout implements Action {
   readonly type = AuthenticationActionTypes.Logout;
   constructor(public payload: Entity[]) {}
@@ -31,10 +37,14 @@ export class Logout implements Action {
 export type AuthenticationAction =
   | Register
   | Login
-  | Logout;
+  | Logged
+  | Logout
+  |Registered;
 
 export const fromAuthenticationActions = {
   Register,
   Login,
-  Logout
+  Logout,
+  Registered,
+  Logged
 };

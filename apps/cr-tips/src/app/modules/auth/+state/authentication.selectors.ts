@@ -38,9 +38,15 @@ const getSelectedAuthentication = createSelector(
   }
 );
 
+
+const getUser = createSelector(getAuthenticationState, (state) => {
+  return state.user;
+})
+
 export const authenticationQuery = {
   getLoaded,
   getError,
   getAllAuthentication,
-  getSelectedAuthentication
+  getSelectedAuthentication,
+  getUser
 };

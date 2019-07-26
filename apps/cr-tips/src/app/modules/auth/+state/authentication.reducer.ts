@@ -2,6 +2,7 @@ import {
   AuthenticationAction,
   AuthenticationActionTypes
 } from './authentication.actions';
+import { User } from '@cr-tips/data';
 
 export const AUTHENTICATION_FEATURE_KEY = 'authentication';
 
@@ -17,7 +18,7 @@ export const AUTHENTICATION_FEATURE_KEY = 'authentication';
 export interface Entity {}
 
 export interface AuthenticationState {
-  list: Entity[]; // list of Authentication; analogous to a sql normalized table
+  user: User; // list of Authentication; analogous to a sql normalized table
   selectedId?: string | number; // which Authentication record has been selected
   loaded: boolean; // has the Authentication list been loaded
   error?: any; // last none error (if any)
@@ -28,7 +29,7 @@ export interface AuthenticationPartialState {
 }
 
 export const initialState: AuthenticationState = {
-  list: [],
+  user: null,
   loaded: false
 };
 
@@ -37,13 +38,10 @@ export function authenticationReducer(
   action: AuthenticationAction
 ): AuthenticationState {
   switch (action.type) {
-    case AuthenticationActionTypes.Login:
-      state = {
-        ...state,
-        list: action.payload,
-        loaded: true
-      };
-      break;
+
+    case AuthenticationActionTypes.Logged:
+      return {...state, user : action.payload}
+    break;
     default:
       return state;
 

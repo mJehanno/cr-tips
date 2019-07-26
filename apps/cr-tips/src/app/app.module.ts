@@ -21,6 +21,7 @@ import { AuthenticationEffects } from './modules/auth/+state/authentication.effe
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RegisterDialogComponent } from './modules/auth/register-dialog/register-dialog.component';
+import { LoginDialogComponent } from './modules/auth/login-dialog/login-dialog.component';
 
 registerLocaleData(en);
 
@@ -43,7 +44,7 @@ registerLocaleData(en);
     EffectsModule.forFeature([AuthenticationEffects]),
     AuthModule],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
-  entryComponents: [RegisterDialogComponent],
+  entryComponents: [RegisterDialogComponent, LoginDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

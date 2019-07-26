@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 import { AuthenticationPartialState } from './authentication.reducer';
 import { authenticationQuery } from './authentication.selectors';
-import { Register } from './authentication.actions';
+import { Register, Logged } from './authentication.actions';
 import { from, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '@cr-tips/data';
@@ -23,6 +23,14 @@ export class AuthenticationFacade {
             this.store.dispatch(new Register(a.user.uid, user));
           })
         );
+  }
+
+  public login(user: User): Promise<any> {
+    return this.af.auth.signInWithEmailAndPassword(user.email, user.password);
+  }
+
+  public userLogged(user: User){
+    this.store.dispatch(new Logged(user) )
   }
 
 }

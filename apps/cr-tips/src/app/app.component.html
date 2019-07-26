@@ -26,7 +26,7 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Profile" nzIcon="user">
+      <li nz-submenu nzOpen nzTitle="Profile" nzIcon="user" *ngIf="userLogged">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a>Profile Informations</a>
@@ -48,8 +48,9 @@
             ></i>
         </span>
         <div class="button-header">
-          <button nz-button (click)="showLoginModal()">Login</button>
-          <button nz-button (click)="showRegisterModal()">Register</button>
+          <button nz-button (click)="showLoginModal()" *ngIf="!userLogged">Login</button>
+          <button nz-button (click)="showRegisterModal()" *ngIf="!userLogged">Register</button>
+          <button nz-button (click)="Logout()" *ngIf="userLogged">Log Out</button>
         </div>
       </div>
     </nz-header>
@@ -60,6 +61,3 @@
     </nz-content>
   </nz-layout>
 </nz-layout>
-<nz-modal [(nzVisible)]="isLoginVisible" nzWidth="650px" nzTitle="Login" (nzOnCancel)="handleLoginCancel()" (nzOnOk)="handleLoginOk()">
-    <cr-tips-login-dialog></cr-tips-login-dialog>
-</nz-modal>

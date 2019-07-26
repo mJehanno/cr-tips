@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NzModalRef, NzModalControlService } from 'ng-zorro-antd';
+import { AuthenticationFacade } from '../+state/authentication.facade';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { UserService } from '../../../core/database/user.service';
+
 
 @Component({
   selector: 'cr-tips-login-dialog',
@@ -8,7 +13,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class LoginDialogComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private modal: NzModalRef, private auhtFacade: AuthenticationFacade,
+    public afAuth: AngularFireAuth, private userService: UserService) { }
 
   validateForm: FormGroup;
 
@@ -18,14 +24,29 @@ export class LoginDialogComponent implements OnInit {
 
   createLoginForm() {
     return this.fb.group({
-      email: [''],
-      password: ['']
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
   submitForm() {
+    if(this.validateForm.valid){
+      const user = { email : this.validateForm.value.email, password: this.validateForm.value.password};
+      this.auhtFacade.login(user).then((auth) => {
+        this.afAuth.user.subscribe((users) => {
+          console.log(users)
+          this.userService.retrieveFromToken(users.uid).subscribe((data) => {
+            this.auhtFacade.userLogged(data[0]);
+          });
+        });
 
+      });
+    }
   }
 
+
+  closeModal() {
+    this.modal.destroy()
+  }
 
 }
