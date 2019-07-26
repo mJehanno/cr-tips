@@ -19,6 +19,9 @@
             <!--<a routerLink="/welcome">Tips</a>-->
           </li>
           <li nz-menu-item nzMatchRouter>
+            <a>Best Composition</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
             <a>Simulator</a>
           </li>
         </ul>
@@ -57,9 +60,6 @@
     </nz-content>
   </nz-layout>
 </nz-layout>
-<nz-modal [(nzVisible)]="isRegisterVisible" nzWidth="600px" nzTitle="Register" (nzOnCancel)="handleRegisterCancel()" (nzOnOk)="handleRegisterOk()">
-  <cr-tips-register-dialog></cr-tips-register-dialog>
-</nz-modal>
-<nz-modal [(nzVisible)]="isLoginVisible" nzWidth="600px" nzTitle="Login" (nzOnCancel)="handleLoginCancel()" (nzOnOk)="handleLoginOk()">
+<nz-modal [(nzVisible)]="isLoginVisible" nzWidth="650px" nzTitle="Login" (nzOnCancel)="handleLoginCancel()" (nzOnOk)="handleLoginOk()">
     <cr-tips-login-dialog></cr-tips-login-dialog>
 </nz-modal>

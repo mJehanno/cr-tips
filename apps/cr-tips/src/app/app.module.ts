@@ -11,13 +11,39 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { AuthModule } from './modules/auth/auth.module';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { StoreModule } from '@ngrx/store';
+import { authenticationReducer } from './modules/auth/+state/authentication.reducer';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools'
+import { EffectsModule } from '@ngrx/effects';
+import { AuthenticationEffects } from './modules/auth/+state/authentication.effects';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { RegisterDialogComponent } from './modules/auth/register-dialog/register-dialog.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, IconsProviderModule, NgZorroAntdModule, FormsModule, HttpClientModule, BrowserAnimationsModule, AuthModule],
+  imports: [BrowserModule,
+    AppRoutingModule,
+    IconsProviderModule,
+    NgZorroAntdModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    StoreModule.forRoot({}, {}),
+    StoreModule.forFeature('auth', authenticationReducer),
+    StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature([AuthenticationEffects]),
+    AuthModule],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
+  entryComponents: [RegisterDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

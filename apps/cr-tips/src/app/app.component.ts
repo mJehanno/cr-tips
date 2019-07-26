@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd';
+import { RegisterDialogComponent } from './modules/auth/register-dialog/register-dialog.component';
+import { AuthenticationState } from './modules/auth/+state/authentication.reducer';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'cr-tips-root',
@@ -10,8 +14,17 @@ export class AppComponent {
   isRegisterVisible = false;
   isLoginVisible = false
 
+
+  constructor(private dialog: NzModalService, private store: Store<AuthenticationState>) {}
+
   showRegisterModal(): void {
-    this.isRegisterVisible = true;
+    this.dialog.create({
+      nzTitle: "Login",
+      nzContent: RegisterDialogComponent,
+      nzFooter: null,
+      nzWidth: '650px'
+    });
+    //this.isRegisterVisible = true;
   }
 
   showLoginModal(): void {
@@ -38,5 +51,8 @@ export class AppComponent {
     console.log('Button cancel clicked!');
     this.isLoginVisible = false;
   }
+
+
+
 }
 
