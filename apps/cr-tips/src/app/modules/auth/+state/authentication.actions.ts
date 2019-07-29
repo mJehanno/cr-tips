@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { Entity } from './authentication.reducer';
 import { User } from '@cr-tips/data';
 
 export enum AuthenticationActionTypes {

@@ -13,7 +13,7 @@ import en from '@angular/common/locales/en';
 import { AuthModule } from './modules/auth/auth.module';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, ActionReducer, MetaReducer } from '@ngrx/store';
 import { authenticationReducer } from './modules/auth/+state/authentication.reducer';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects';
@@ -22,9 +22,15 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RegisterDialogComponent } from './modules/auth/register-dialog/register-dialog.component';
 import { LoginDialogComponent } from './modules/auth/login-dialog/login-dialog.component';
+import { localStorageSync } from 'ngrx-store-localstorage';
 
 registerLocaleData(en);
 
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({keys: ['auth'], rehydrate: true})(reducer);
+}
+
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule,
@@ -37,7 +43,7 @@ registerLocaleData(en);
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({}, {metaReducers}),
     StoreModule.forFeature('auth', authenticationReducer),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([]),

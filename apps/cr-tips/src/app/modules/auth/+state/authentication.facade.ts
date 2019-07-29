@@ -2,18 +2,19 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { select, Store } from '@ngrx/store';
 
-import { AuthenticationPartialState } from './authentication.reducer';
+
 import { authenticationQuery } from './authentication.selectors';
 import { Register, Logged, Logout } from './authentication.actions';
 import { from, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '@cr-tips/data';
+import { AuthenticationState } from './authentication.reducer';
 
 @Injectable()
 export class AuthenticationFacade {
 
 
-  constructor(private store: Store<AuthenticationPartialState>, private af: AngularFireAuth) {}
+  constructor(private store: Store<AuthenticationState>, private af: AngularFireAuth) {}
 
 
   public register(user: User): Observable<any> {

@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {
-  AUTHENTICATION_FEATURE_KEY,
   initialState as authenticationInitialState,
   authenticationReducer
 } from './+state/authentication.reducer';
@@ -20,7 +19,7 @@ import { AuthenticationFacade } from './+state/authentication.facade';
     CommonModule,
     NgZorroAntdModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(AUTHENTICATION_FEATURE_KEY, authenticationReducer, {
+    StoreModule.forFeature('auth', authenticationReducer, {
       initialState: authenticationInitialState
     }),
     EffectsModule.forFeature([AuthenticationEffects])

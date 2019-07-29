@@ -1,13 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
-  AUTHENTICATION_FEATURE_KEY,
   AuthenticationState
 } from './authentication.reducer';
 
 // Lookup the 'Authentication' feature state managed by NgRx
-const getAuthenticationState = createFeatureSelector<AuthenticationState>(
-  AUTHENTICATION_FEATURE_KEY
-);
+const getAuthenticationState = createFeatureSelector<AuthenticationState>('auth');
 
 const getLoaded = createSelector(
   getAuthenticationState,
@@ -18,25 +15,11 @@ const getError = createSelector(
   (state: AuthenticationState) => state.error
 );
 
-const getAllAuthentication = createSelector(
-  getAuthenticationState,
-  getLoaded,
-  (state: AuthenticationState, isLoaded) => {
-    return isLoaded ? state.list : [];
-  }
-);
 const getSelectedId = createSelector(
   getAuthenticationState,
   (state: AuthenticationState) => state.selectedId
 );
-const getSelectedAuthentication = createSelector(
-  getAllAuthentication,
-  getSelectedId,
-  (authentication, id) => {
-    const result = authentication.find(it => it['id'] === id);
-    return result ? Object.assign({}, result) : undefined;
-  }
-);
+
 
 
 const getUser = createSelector(getAuthenticationState, (state) => {
@@ -46,7 +29,5 @@ const getUser = createSelector(getAuthenticationState, (state) => {
 export const authenticationQuery = {
   getLoaded,
   getError,
-  getAllAuthentication,
-  getSelectedAuthentication,
   getUser
 };
