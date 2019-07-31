@@ -1,0 +1,8 @@
+.tips-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+nz-table {
+  margin-top: 5%;
+}

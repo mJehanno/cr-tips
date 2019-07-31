@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.pipe(select(authenticationQuery.getUser)).subscribe((user) => {
-      if(user !== null) {
+      if(user !== null && user !== undefined) {
         this.userLogged = true;
       }else {
         this.userLogged = false;

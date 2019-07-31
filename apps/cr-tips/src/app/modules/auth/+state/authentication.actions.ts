@@ -39,10 +39,4 @@ export type AuthenticationAction =
   | Logout
   |Registered;
 
-export const fromAuthenticationActions = {
-  Register,
-  Login,
-  Logout,
-  Registered,
-  Logged
-};
+

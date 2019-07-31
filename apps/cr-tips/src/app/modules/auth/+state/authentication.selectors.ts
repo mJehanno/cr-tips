@@ -23,6 +23,7 @@ const getSelectedId = createSelector(
 
 
 const getUser = createSelector(getAuthenticationState, (state) => {
+  console.log(state.user);
   return state.user;
 })
 

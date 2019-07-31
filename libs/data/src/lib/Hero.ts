@@ -1,9 +1,9 @@
 export interface Hero {
-  idHeroes: number;
+  idHeroes: string;
   name: string;
   manaCost: number;
-  race: string;
+  race: string[];
   classes : string[];
-  tier: string;
+  tier: string; // []
   ability: string;
 }

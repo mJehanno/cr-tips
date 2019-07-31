@@ -33,7 +33,8 @@
             ],
             "styles": [
               "apps/cr-tips/src/theme.less",
-              "apps/cr-tips/src/styles.less"
+              "apps/cr-tips/src/styles.less",
+              "./node_modules/quill-emoji/dist/quill-emoji.css"
             ],
             "scripts": []
           },

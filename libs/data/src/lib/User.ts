@@ -7,4 +7,6 @@ export interface User {
   ign?: string;
   password?: string;
   ranks?: Rank[];
+  tipVoted?: string[];
+  compoVoted?: string[];
 }

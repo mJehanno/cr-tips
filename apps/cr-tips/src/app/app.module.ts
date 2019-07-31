@@ -23,6 +23,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RegisterDialogComponent } from './modules/auth/register-dialog/register-dialog.component';
 import { LoginDialogComponent } from './modules/auth/login-dialog/login-dialog.component';
 import { localStorageSync } from 'ngrx-store-localstorage';
+import { tipReducer } from './pages/tips-page/+state/tips.reducer';
+import { TipEffect } from './pages/tips-page/+state/tips.effect';
 
 registerLocaleData(en);
 
@@ -45,9 +47,10 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AngularFirestoreModule,
     StoreModule.forRoot({}, {metaReducers}),
     StoreModule.forFeature('auth', authenticationReducer),
+    StoreModule.forFeature('tip', tipReducer),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([]),
-    EffectsModule.forFeature([AuthenticationEffects]),
+    EffectsModule.forFeature([AuthenticationEffects, TipEffect]),
     AuthModule],
   providers: [{ provide: NZ_I18N, useValue: en_GB }],
   entryComponents: [RegisterDialogComponent, LoginDialogComponent],

@@ -13,7 +13,6 @@ export class AuthenticationEffects {
   @Effect() register$ = this.actions$.pipe(
     ofType<Register>(AuthenticationActionTypes.Register),
     switchMap((action) => {
-      console.log(action);
       action.user.idUser = action.uid;
       action.user.password = action.user['checkPassword'] = null
       return this.userService.create(action.user);
