@@ -6,4 +6,6 @@ export interface Hero {
   classes : string[];
   tier: string; // []
   ability: string;
+  image?: string;
+  avat?: string;
 }

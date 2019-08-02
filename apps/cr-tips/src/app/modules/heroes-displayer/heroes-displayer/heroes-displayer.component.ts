@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Hero } from '@cr-tips/data';
+import { HeroesService } from '../../../core/database/heroes.service';
 
 @Component({
   selector: 'cr-tips-heroes-displayer',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeroesDisplayerComponent implements OnInit {
 
-  constructor() { }
+  heroes: Hero[] = [];
+
+  constructor(private heroesService: HeroesService ) { }
 
   ngOnInit() {
+    this.heroesService.getAll().subscribe((data) => {
+      /*data.forEach(element => {
+        element.image = '/assets/Selection_119.png'
+      });*/
+      this.heroes = <Hero[]>data;
+    });
+
   }
 
 }

@@ -43,6 +43,7 @@ export class CreateTipsComponent implements OnInit {
         title: this.validateForm.value.title,
         description: this.validateForm.value.description,
         date: new Date(),
+        score:0,
         author: this.currentUser.idUser};
       this.facade.addTips(tips);
       this.route.navigate(['/','tips']);

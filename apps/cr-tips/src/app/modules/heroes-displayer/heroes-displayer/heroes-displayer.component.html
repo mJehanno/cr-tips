@@ -1,3 +1,15 @@
-<p>
-  heroes-displayer works!
-</p>
+<div class="card-container">
+  <nz-card [nzHoverable]="true" *ngFor="let hero of heroes" [nzExtra]="'mana : ' + hero.manaCost" [nzTitle]="hero.name" [nzCover]="coverTemplate">
+    <div class="content-container">
+      <div class="class-container">
+          <nz-card-meta class="classes" *ngFor="let class of hero.classes" [nzDescription]="class"></nz-card-meta>
+      </div>
+      <div class="race-container">
+          <nz-card-meta class="races" *ngFor="let race of hero.race" [nzDescription]="race" [ngClass]="race"></nz-card-meta>
+      </div>
+    </div>
+    <ng-template #coverTemplate>
+      <img alt="example" [src]="hero.image" />
+    </ng-template>
+  </nz-card>
+</div>

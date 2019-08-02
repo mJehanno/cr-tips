@@ -10,8 +10,9 @@ export class HeroesService {
   constructor(private af: AngularFirestore) { }
 
   public getAll(){
-    this.af.collection('heroes').get().pipe(
-      map(snap => snap.docs.map(doc => doc))
+    console.log('ok')
+    return this.af.collection('heroes').get().pipe(
+      map(snap => snap.docs.map(doc => doc.data()))
     );
   }
 
