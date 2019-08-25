@@ -18,7 +18,14 @@ export class HeroesDisplayerComponent implements OnInit {
       /*data.forEach(element => {
         element.image = '/assets/Selection_119.png'
       });*/
-      this.heroes = <Hero[]>data;
+      this.heroes = <Hero[]>data.sort((a,b) => {
+        if(a.name > b.name) {
+          return 1;
+        } else if ( b.name > a.name ) {
+          return -1;
+        }
+        return 0;
+      });
     });
 
   }

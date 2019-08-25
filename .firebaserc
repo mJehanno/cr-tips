@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "cr-tips": {
+      "hosting": {
+        "cr-tips": [
+          "cr-tips"
+        ]
+      }
+    }
+  }
+}

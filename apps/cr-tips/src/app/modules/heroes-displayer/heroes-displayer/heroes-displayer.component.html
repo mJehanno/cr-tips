@@ -9,7 +9,8 @@
       </div>
     </div>
     <ng-template #coverTemplate>
-      <img alt="example" [src]="hero.image" />
+      <img alt="example" [src]="hero.image" *ngIf="hero.image !== undefined" />
+      <p *ngIf="hero.image === undefined">No picture Avalaible</p>
     </ng-template>
   </nz-card>
 </div>

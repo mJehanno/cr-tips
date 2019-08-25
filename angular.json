@@ -102,6 +102,10 @@
             "tsConfig": "apps/cr-tips/tsconfig.spec.json",
             "setupFile": "apps/cr-tips/src/test-setup.ts"
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     },
