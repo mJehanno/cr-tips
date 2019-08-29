@@ -39,13 +39,23 @@ export class TipEffect{
           tip.date = new Date(tip.date['seconds'] * 1000);
           return tip
         })
-      })
-  ).pipe(
-    map(tip => {console.log(tip); return from(tip)}),
-    map(tip$ => tip$.pipe(
-      map(tip => this.userService.retrieveFromToken(tip.author)),
-      mergeAll()
-    ))
+      }),
+      pipe(
+        map(tip => {localStorage.setItem('tips', JSON.stringify(tip)); return from(tip)}),
+        map(tip$ => tip$.pipe(
+            mergeMap(tip => this.userService.retrieveFromToken(tip.author))
+          )
+        )
+      ),
+      pipe(
+        switchMap((user$) => { 
+          console.log(user$)
+          return user$.pipe(
+            map(user => user/*console.log(user)*/)
+          )
+})
+      ),
+      map(() => { return new GotAllTipAction();})
   )
 
 }

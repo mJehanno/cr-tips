@@ -21,7 +21,7 @@ export function tipReducer(state: TipState = initialTipState,
         console.log(action)
         return {...state, tips: [...state.tips, action['tip']]}
       case TipsActionType.GotAllTipAction:
-        return {...state, tips: action.tips, gotTipsFromDb: true}
+        return {...state}
       case TipsActionType.DisplayingTipAction:
         console.log(action.tips)
         return {...state, displayedTip: action.tips}

@@ -3,6 +3,7 @@
 }
 
 .card-container {
+  margin-top: 2em;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -13,6 +14,20 @@
 nz-card {
   margin: 1em;
   width: 25%;
+}
+
+.button-container .race-filterer, .button-container .class-filterer, .button-container .tier-filterer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 1em;
+}
+
+.icon-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
 }
 
 .content-container{
@@ -26,10 +41,27 @@ nz-card-meta{
   flex-direction: column;
 }
 
-.Goblin{
-  color: green !important;
+.common{
+  border-color: darkgray;
+  border-width: 3px;
 }
 
-.Elf .ant-card-meta-description{
-   color: chartreuse !important;
+.uncommon{
+  border-color: darkcyan;
+  border-width: 3px;
+}
+
+.rare{
+  border-color: darkblue;
+  border-width: 3px;
+}
+
+.epic{
+  border-color: darkviolet;
+  border-width: 3px;
+}
+
+.legendary{
+  border-color: orangered;
+  border-width: 3px;
 }

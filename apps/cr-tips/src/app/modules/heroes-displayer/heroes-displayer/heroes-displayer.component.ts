@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Hero } from '@cr-tips/data';
 import { HeroesService } from '../../../core/database/heroes.service';
 
@@ -7,7 +7,7 @@ import { HeroesService } from '../../../core/database/heroes.service';
   templateUrl: './heroes-displayer.component.html',
   styleUrls: ['./heroes-displayer.component.css']
 })
-export class HeroesDisplayerComponent implements OnInit {
+export class HeroesDisplayerComponent implements OnInit, OnDestroy {
 
   heroes: Hero[] = [];
 
@@ -26,8 +26,30 @@ export class HeroesDisplayerComponent implements OnInit {
         }
         return 0;
       });
+      localStorage.setItem('heroes', JSON.stringify(this.heroes))
     });
 
+  }
+
+  filterData(feat:string){
+    this.heroes = JSON.parse(localStorage.getItem('heroes'));
+    this.heroes = this.heroes.filter((hero) => {
+      let result;
+      const heroClass = hero.classes.find((elem) => {return elem === feat;} );
+      const heroRace = hero.race.find((elem) =>{return elem === feat;}); 
+      if(heroClass === undefined && heroRace === undefined) {
+        return hero.tier === feat
+      } else if (heroRace === undefined) {
+        result = heroClass
+      } else {
+        result = heroRace
+      }
+      return result;
+    });
+  }
+
+  ngOnDestroy(){
+    localStorage.removeItem('heroes');
   }
 
 }

@@ -26,7 +26,7 @@ export class GetAllTipAction implements Action {
 
 export class GotAllTipAction implements Action {
   readonly type = TipsActionType.GotAllTipAction;
-  constructor(public tips: Tip[]){}
+  constructor(){}
 }
 
 export class DisplayingTipAction implements Action {
