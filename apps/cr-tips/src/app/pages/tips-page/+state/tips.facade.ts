@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { Tip } from '@cr-tips/data';
 import { TipState } from './tips.reducer';
-import { AddTipAction, GetAllTipAction } from './tips.action';
+import { AddTipAction, GetAllTipAction, GetTipDetailAction } from './tips.action';
 
 @Injectable()
 export class TipsFacade {
@@ -12,12 +12,16 @@ export class TipsFacade {
 
 
   public addTips(tip: Tip) {
-    console.log('facade');
     this.store.dispatch(new AddTipAction(tip));
   }
 
   public getAllTips() {
     this.store.dispatch(new GetAllTipAction());
   }
+
+  public getOneTip(id: string) {
+    this.store.dispatch(new GetTipDetailAction(id));
+  }
+
 
 }

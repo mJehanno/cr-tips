@@ -9,17 +9,19 @@ import { QuillModule } from 'ngx-quill';
 import 'quill-emoji/dist/quill-emoji.js'
 import { TipsFacade } from './+state/tips.facade';
 import { AuthGuard } from '../../core/guards/auth.guard';
+import { TipsDetailComponent } from './tips-detail/tips-detail.component';
 
 
 const routes: Routes = [
   { path:'', component: TipsPageComponent },
   { path:'create', component: CreateTipsComponent, canActivate: [AuthGuard] },
+  { path: ':id', component: TipsDetailComponent}
 ];
 
 const emojiIcon = '<svg class="i" viewBox="0 0 24 24"><use href="#emoticon-happy"></use></svg>';
 
 @NgModule({
-  declarations: [TipsPageComponent, CreateTipsComponent],
+  declarations: [TipsPageComponent, CreateTipsComponent, TipsDetailComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -1,0 +1,9 @@
+<h1>{{tip.title}}</h1>
+<h2>{{tip.description}}</h2>
+
+<div class="article-meta">
+<i>By : {{_.capitalize(tip.authorUser.nickname)}}</i>
+<i>{{tip.date | date}}</i>
+</div>
+<div [innerHTML]="tip.content">
+</div>

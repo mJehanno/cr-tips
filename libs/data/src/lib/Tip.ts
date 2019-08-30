@@ -2,7 +2,7 @@ import { Hero } from './Hero';
 import { Commentary } from './Commentary';
 
 export interface Tip {
-  idTips?: NumberConstructor;
+  idTips?: string;
   author: string;
   date: Date;
   title: string;

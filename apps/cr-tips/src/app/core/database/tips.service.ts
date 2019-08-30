@@ -10,21 +10,24 @@ import { pipe } from 'rxjs';
 })
 export class TipsService {
 
+  public selectedTips: DisplayedTip;
+
   constructor( private af: AngularFirestore, private userService: UserService) { }
 
   public getAll() {
-    return this.af.collection<Tip>('tips', ref => ref.orderBy('date', 'desc'))
-    .snapshotChanges()
+    return this.af.collection<Tip>('tips', ref => ref.orderBy('date', 'desc')).valueChanges({idField: 'idTips'})
     .pipe(
       map(snaps => snaps.map(snap => {
-        const tip: Tip = snap.payload.doc.data();
+        const tip: Tip = snap;
         return tip;
       }))
     )
   }
 
 
-
+  public getOneById(id: string){
+    return this.af.collection<Tip>('tips').doc(id).valueChanges();
+  }
 
   public create(tip: Tip) {
     tip.score = 0;

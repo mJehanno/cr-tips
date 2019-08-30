@@ -6,12 +6,14 @@ export interface TipState{
   tips: Tip[];
   gotTipsFromDb: boolean;
   displayedTip: DisplayedTip[];
+  selectedTip: DisplayedTip;
 }
 
 export const initialTipState: TipState = {
   tips : [],
   displayedTip: [],
-  gotTipsFromDb: false
+  gotTipsFromDb: false,
+  selectedTip: {authorUser: {email:''}, date: new Date(), content: '', score: 0,  title: ''}
 }
 
 export function tipReducer(state: TipState = initialTipState,
@@ -21,10 +23,12 @@ export function tipReducer(state: TipState = initialTipState,
         console.log(action)
         return {...state, tips: [...state.tips, action['tip']]}
       case TipsActionType.GotAllTipAction:
-        return {...state}
+        return {...state, displayedTip: action.payload}
       case TipsActionType.DisplayingTipAction:
         console.log(action.tips)
         return {...state, displayedTip: action.tips}
+      case TipsActionType.GotDetailTipAction:
+          return {...state, selectedTip: action.tip}
         default:
           return state;
     }

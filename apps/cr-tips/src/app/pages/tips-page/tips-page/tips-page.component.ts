@@ -9,6 +9,7 @@ import { TipsFacade } from '../+state/tips.facade';
 import { UserService } from '../../../core/database/user.service';
 import { map, flatMap, switchMap, mergeAll, mergeMap } from 'rxjs/operators';
 import { forkJoin, Observable, merge, concat } from 'rxjs';
+import { TipsService } from '../../../core/database/tips.service';
 
 @Component({
   selector: 'cr-tips-tips-page',
@@ -21,7 +22,7 @@ export class TipsPageComponent implements OnInit {
   tips: any[] = [];
 
   constructor(private store: Store<AuthenticationState>, private tipStore: Store<TipState>,
-    private tipFace: TipsFacade, private userService: UserService) { }
+    private tipFace: TipsFacade, private userService: UserService, private tipService: TipsService) { }
 
   ngOnInit() {
     this.tipFace.getAllTips();
@@ -29,9 +30,14 @@ export class TipsPageComponent implements OnInit {
       this.currentUser = data;
     });
 
-    this.tipStore.pipe(select(tipQuery.getTips)).subscribe((data) => {
-
+    this.tipStore.pipe(select(tipQuery.getDisplayedTips)).subscribe((data) => {
+      this.tips = data;
     });
 
+  }
+
+
+  selectTip(tip: DisplayedTip) {
+    this.tipService.selectedTips = tip;
   }
 }

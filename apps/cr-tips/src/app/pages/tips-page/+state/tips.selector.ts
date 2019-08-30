@@ -11,7 +11,10 @@ const getDisplayedTips = createSelector(getTipState, (state: TipState) => {
   return state.displayedTip;
 })
 
+const getSelectedTips = createSelector(getTipState, (state: TipState) => state.selectedTip)
+
 export const tipQuery = {
   getTips,
-  getDisplayedTips
+  getDisplayedTips,
+  getSelectedTips
 }

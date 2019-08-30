@@ -1,8 +1,8 @@
 import { Injectable, ɵConsole } from '@angular/core';
 import { TipsService } from '../../../core/database/tips.service';
 import { Actions, ofType, Effect } from '@ngrx/effects';
-import { AddTipAction, TipsActionType, AddedTipAction, GotAllTipAction, GetAllTipAction, DisplayingTipAction } from './tips.action';
-import { switchMap, map, flatMap, concatMap, expand, mergeMap, mergeAll, concatAll, switchAll } from 'rxjs/operators';
+import { AddTipAction, TipsActionType, AddedTipAction, GotAllTipAction, GetAllTipAction, DisplayingTipAction, GetTipDetailAction, GotDetailTipAction } from './tips.action';
+import { switchMap, map, flatMap, concatMap, expand, mergeMap, mergeAll, concatAll, switchAll, tap, combineAll } from 'rxjs/operators';
 import { Tip, DisplayedTip } from '@cr-tips/data';
 import {firestore} from 'firebase'
 import { UserService } from '../../../core/database/user.service';
@@ -29,83 +29,58 @@ export class TipEffect{
     map(() => new AddedTipAction())
   );
 
-  @Effect() getTip$ = this.actions$.pipe(
+  @Effect() getAllTips$ = this.actions$.pipe(
     ofType<GetAllTipAction>(TipsActionType.GetAllTipAction),
       switchMap(() => {
         return this.tipService.getAll();
       }),
       map((tips) => {
-        return tips.map(tip => {
+        console.log(tips)
+        localStorage.setItem('tips', JSON.stringify(tips));
+        return from(tips)
+      }),
+      mergeMap((tip$) => {
+        return tip$
+      }),
+      map((tip) =>  this.userService.retrieveFromToken(tip.author)),
+      map(user$ => user$),
+      mergeMap(user =>  user),
+      map(user => {
+        const tips = JSON.parse(localStorage.getItem('tips'));
+        tips.map(tip => {
           tip.date = new Date(tip.date['seconds'] * 1000);
           return tip
         })
+        const disTips = tips.map((tip) => {
+          if(tip.author === user[0].idUser) {
+            return {idTips: tip.idTips, authorUser: user[0], date: tip.date, title: tip.title,
+              description: tip.description, content: tip.content, commentaries: tip.commentaries, score: tip.score }
+          }
+        })
+        return disTips;
       }),
-      pipe(
-        map(tip => {localStorage.setItem('tips', JSON.stringify(tip)); return from(tip)}),
-        map(tip$ => tip$.pipe(
-            mergeMap(tip => this.userService.retrieveFromToken(tip.author))
-          )
-        )
-      ),
-      pipe(
-        switchMap((user$) => { 
-          console.log(user$)
-          return user$.pipe(
-            map(user => user/*console.log(user)*/)
-          )
-})
-      ),
-      map(() => { return new GotAllTipAction();})
-  )
-
-}
-
-  /*@Effect() getTip$ = this.actions$.pipe(
-    ofType<GetAllTipAction>(TipsActionType.GetAllTipAction),
-    switchMap(() => {
-      return this.tipService.getAll();
-    }),
-    map((elem) => {
-      const tips = elem.docs.map((elem) => {
-        const data = elem.data()
-        const fdate = data['date'] as firestore.Timestamp;
-        const date = fdate.toDate();
-        return {author: data['author'], content: data['content'], date, title: data['title'], description: data['description'], score: data['score']}
-      })
-      return new GotAllTipAction(tips);
-    })
+      map((tips) => new GotAllTipAction(tips))
   );
 
-    @Effect() modifyTip$ = this.actions$.pipe(
-      ofType<GotAllTipAction>(TipsActionType.GotAllTipAction),
-      switchMap(async (action) => {
-        const tips = await action.tips.map(async (tip) => {
-          this.userService.retrieveFromToken(tip.author).subscribe((user) => {
-            console.log('meh')
-            return  {
-              authorUser: user,
-              content: tip.content,
-              title: tip.title,
-              description: tip.description,
-              date: tip.date,
-              idTips: tip.idTips,
-              score: tip.score
-            }
-          })
-        })
-        console.log('1')
-        console.log(tips);
-        return from(tips);
-      }),
-      map(async (elem) => {
-        console.log('2');
-        console.log(elem);
-        return new DisplayingTipAction(elem);
-      })
-    );
-*/
+  @Effect() getTip$ = this.actions$.pipe(
+    ofType<GetTipDetailAction>(TipsActionType.GetTipDetailAction),
+    switchMap((action) => this.tipService.getOneById(action.id)),
+    map((tip: Tip) => {
+      localStorage.setItem('selectedTip', JSON.stringify(tip));
+      return this.userService.retrieveFromToken(tip.author);
+    }),
+    switchMap((user$) => user$),
+    map((user) => {
+      const tip = JSON.parse(localStorage.getItem('selectedTip'));
+      tip.date = new Date(tip.date['seconds'] * 1000);
+      localStorage.removeItem('selectedTip');
+      return {idTips: tip.idTips, authorUser: user[0], date: tip.date, title: tip.title,
+        description: tip.description, content: tip.content, commentaries: tip.commentaries, score: tip.score }
+    }),
+    map((tip) => new GotDetailTipAction(tip))
+  );
 
-
+}
 
 
 

@@ -6,7 +6,9 @@ export enum TipsActionType {
   AddedTipAction = "[Tip] Added Tip",
   GetAllTipAction = "[Tip] Get All Tips",
   GotAllTipAction = "[Tip] Got All Tips",
-  DisplayingTipAction = "[Tip] Reformating Tip before display"
+  DisplayingTipAction = "[Tip] Reformating Tip before display",
+  GetTipDetailAction = "[Tip] Get Tip",
+  GotDetailTipAction = "[Tip] Got Tip"
 }
 
 
@@ -26,7 +28,7 @@ export class GetAllTipAction implements Action {
 
 export class GotAllTipAction implements Action {
   readonly type = TipsActionType.GotAllTipAction;
-  constructor(){}
+  constructor(public payload: DisplayedTip[]){}
 }
 
 export class DisplayingTipAction implements Action {
@@ -34,5 +36,16 @@ export class DisplayingTipAction implements Action {
   constructor(public tips: DisplayedTip[]){}
 }
 
-export type TipAction = AddTipAction | AddedTipAction | GetAllTipAction | GotAllTipAction | DisplayingTipAction;
+export class GetTipDetailAction implements Action {
+  readonly type = TipsActionType.GetTipDetailAction
+  constructor(public id: string){}
+}
+
+export class GotDetailTipAction implements Action {
+  readonly type = TipsActionType.GotDetailTipAction;
+  constructor(public tip: DisplayedTip){}
+}
+
+export type TipAction = AddTipAction | AddedTipAction | GetAllTipAction |
+GotAllTipAction | DisplayingTipAction | GetTipDetailAction | GotDetailTipAction;
 

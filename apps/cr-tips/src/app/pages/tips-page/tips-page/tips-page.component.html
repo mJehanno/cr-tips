@@ -12,15 +12,19 @@
     <th>Description</th>
     <th>Score</th>
     <th>Date</th>
+    <th>Action</th>
   </thead>
   <tbody>
     <tr *ngFor="let tip of tips">
-
       <td>{{tip.authorUser.nickname}}</td>
       <td>{{tip.title}}</td>
       <td>{{tip.description}}</td>
       <td>{{tip.score}}</td>
       <td>{{tip.date | date:'short'}}</td>
+      <td class="action">
+        <a [routerLink]="tip.idTips" (click)="selectTip(tip)"><i nz-icon [nzType]="'eye'"></i></a>
+        <i nz-icon *ngIf="currentUser && currentUser.idUser === tip.authorUser.idUser" [nzType]="'edit'"></i>
+      </td>
     </tr>
   </tbody>
 </nz-table>

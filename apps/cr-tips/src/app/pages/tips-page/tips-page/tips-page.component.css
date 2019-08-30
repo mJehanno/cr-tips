@@ -6,3 +6,8 @@
 nz-table {
   margin-top: 5%;
 }
+
+.action i{
+  margin: 0 1em;
+  cursor: pointer;
+}

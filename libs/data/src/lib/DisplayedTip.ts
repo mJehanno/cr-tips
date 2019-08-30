@@ -1,7 +1,7 @@
 import { User, Commentary } from '..';
 
 export interface DisplayedTip {
-    idTips?: NumberConstructor;
+    idTips?: string;
     authorUser: User;
     date: Date;
     title: string;
