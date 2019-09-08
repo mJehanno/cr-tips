@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NzModalRef, NzModalControlService } from 'ng-zorro-antd';
+import { NzModalRef, NzModalControlService, NzMessageService } from 'ng-zorro-antd';
 import { AuthenticationFacade } from '../+state/authentication.facade';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserService } from '../../../core/database/user.service';
@@ -14,7 +14,7 @@ import { UserService } from '../../../core/database/user.service';
 export class LoginDialogComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private modal: NzModalRef, private auhtFacade: AuthenticationFacade,
-    public afAuth: AngularFireAuth, private userService: UserService) { }
+    public afAuth: AngularFireAuth, private userService: UserService, private message: NzMessageService) { }
 
   validateForm: FormGroup;
 
@@ -36,11 +36,13 @@ export class LoginDialogComponent implements OnInit {
         this.afAuth.user.subscribe((users) => {
           console.log(users)
           this.userService.retrieveFromToken(users.uid).subscribe((data) => {
+            console.log(data);
             this.auhtFacade.userLogged(data[0]);
+            this.closeModal();
           });
         });
 
-      });
+      }).catch((err) => { this.message.error('Wrong login/password');});
     }
   }
 

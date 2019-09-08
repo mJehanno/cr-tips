@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import {User} from '@cr-tips/data'
 import { AuthenticationFacade } from '../+state/authentication.facade';
 import { NzModalRef } from 'ng-zorro-antd';
@@ -25,7 +25,7 @@ export class RegisterDialogComponent implements OnInit {
     return this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.min(7)])],
-      checkPassword: ['',Validators.compose([Validators.required])],
+      checkPassword: ['',Validators.compose([Validators.required, this.confirmationValidator])],
       nickname: ['', Validators.required],
       ign: ['']
     }, {validators: this.updateConfirmValidator});
@@ -40,15 +40,23 @@ export class RegisterDialogComponent implements OnInit {
 
     }
   }
+
   closeModal() {
     this.modal.destroy()
   }
 
-  updateConfirmValidator(group: FormGroup) {
-    const pass = group.controls.password.value;
-    const confirmPass = group.controls.checkPassword.value;
-
-    return pass === confirmPass ? null : { notSame: true }
+  updateConfirmValidator(): void {
+    /** wait for refresh value */
+    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
   }
+
+  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return { required: true };
+    } else if (control.value !== this.validateForm.controls.password.value) {
+      return { confirm: true, error: true };
+    }
+    return {};
+  };
 
 }
