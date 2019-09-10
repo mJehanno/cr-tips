@@ -1,6 +1,13 @@
-<h1>{{tip.title}}</h1>
-<h2>{{tip.description}}</h2>
-
+<div class="header-container">
+  <div>
+    <h1>{{tip.title}}</h1>
+    <h2>{{tip.description}}</h2>
+  </div>
+  <div>
+    <nz-tag [nzColor]="'#87d068'">{{tip.category}}</nz-tag>
+    <nz-tag [nzColor]="'#108ee9'">{{tip.game_mode}}</nz-tag>
+  </div>
+</div>
 <div class="article-meta">
 <i>By : {{_.capitalize(tip.authorUser.nickname)}}</i>
 <i>{{tip.date | date}}</i>

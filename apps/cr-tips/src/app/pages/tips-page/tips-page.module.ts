@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TipsPageComponent } from './tips-page/tips-page.component';
-import { NzButtonModule, NzIconModule, NzTableModule, NzFormModule, NzInputModule } from 'ng-zorro-antd';
+import { NzButtonModule, NzIconModule, NzTableModule, NzFormModule, NzInputModule, NzSelectModule, NzTagModule } from 'ng-zorro-antd';
 import { CreateTipsComponent } from './create-tips/create-tips.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -28,7 +28,9 @@ const emojiIcon = '<svg class="i" viewBox="0 0 24 24"><use href="#emoticon-happy
     NzButtonModule,
     NzIconModule,
     NzTableModule,
+    NzSelectModule,
     ReactiveFormsModule,
+    NzTagModule,
     NzFormModule,
     NzInputModule,
     QuillModule.forRoot({

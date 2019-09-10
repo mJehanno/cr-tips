@@ -10,6 +10,7 @@ import { UserService } from '../../../core/database/user.service';
 import { map, flatMap, switchMap, mergeAll, mergeMap } from 'rxjs/operators';
 import { forkJoin, Observable, merge, concat } from 'rxjs';
 import { TipsService } from '../../../core/database/tips.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'cr-tips-tips-page',
@@ -17,7 +18,7 @@ import { TipsService } from '../../../core/database/tips.service';
   styleUrls: ['./tips-page.component.css']
 })
 export class TipsPageComponent implements OnInit {
-
+  _ = _;
   currentUser: User = null;
   tips: any[] = [];
 

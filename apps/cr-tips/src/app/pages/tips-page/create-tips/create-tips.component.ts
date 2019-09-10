@@ -16,6 +16,8 @@ export class CreateTipsComponent implements OnInit {
 
   validateForm: FormGroup
   currentUser: User;
+  gameMode = null;
+  category = null;
 
 
   constructor(private fb: FormBuilder, private facade: TipsFacade, private store:Store<AuthenticationState>, private route: Router) { }
@@ -32,7 +34,9 @@ export class CreateTipsComponent implements OnInit {
     return this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      content: ['', Validators.required]
+      content: ['', Validators.required],
+      category: ['', Validators.required],
+      game_mode: ['', Validators.required]
     });
   }
 
@@ -44,7 +48,10 @@ export class CreateTipsComponent implements OnInit {
         description: this.validateForm.value.description,
         date: new Date(),
         score:0,
-        author: this.currentUser.idUser};
+        author: this.currentUser.idUser,
+        game_mode: this.validateForm.value.game_mode,
+        category: this.validateForm.value.category
+      };
       this.facade.addTips(tips);
       this.route.navigate(['/','tips']);
     }

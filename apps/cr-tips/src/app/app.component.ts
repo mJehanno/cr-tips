@@ -21,9 +21,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.pipe(select(authenticationQuery.getUser)).subscribe((user) => {
-      if(user !== null && user !== undefined) {
+      if (user !== null && user !== undefined) {
         this.userLogged = true;
-      }else {
+      } else {
         this.userLogged = false;
       }
     });
@@ -35,9 +35,15 @@ export class AppComponent implements OnInit {
       nzTitle: "Register",
       nzContent: RegisterDialogComponent,
       nzFooter: null,
-      nzWidth: '650px'
+      nzWidth: '650px',
+      nzClosable: true,
+      nzMaskClosable: false,
+      nzOnCancel: (instance) => {
+        if (instance.validateForm.untouched){
+          return false;
+        }
+      }
     });
-    //this.isRegisterVisible = true;
   }
 
   showLoginModal(): void {
@@ -45,8 +51,16 @@ export class AppComponent implements OnInit {
       nzTitle: "Login",
       nzContent: LoginDialogComponent,
       nzFooter: null,
-      nzWidth: "600px"
-    });
+      nzWidth: "600px",
+      nzMaskClosable: false,
+      nzClosable: true,
+      nzKeyboard: false,
+      nzOnCancel: (instance) => {
+        if (instance.validateForm.untouched){
+          return false;
+        }
+      }
+    })
   }
 
   logout() {

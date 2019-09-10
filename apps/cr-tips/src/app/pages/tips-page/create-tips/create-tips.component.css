@@ -2,10 +2,24 @@
   width: 100%;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .form-button {
   margin: 2em auto 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+nz-select {
+  margin: 1em 0;
+}
+
+nz-form-item {
+  width: 40%;
 }
 
