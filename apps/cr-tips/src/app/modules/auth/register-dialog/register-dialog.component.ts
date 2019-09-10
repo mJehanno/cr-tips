@@ -14,7 +14,7 @@ export class RegisterDialogComponent implements OnInit {
   constructor(private fb: FormBuilder, private auhtFacade: AuthenticationFacade,private modal: NzModalRef) { }
 
   @Output() registered = new EventEmitter();
-  validateForm: FormGroup;
+  validateForm: FormGroup = new FormGroup({});
   user: User;
   ngOnInit() {
     this.validateForm = this.createRegisterForm();
@@ -28,13 +28,12 @@ export class RegisterDialogComponent implements OnInit {
       checkPassword: ['',Validators.compose([Validators.required, this.confirmationValidator])],
       nickname: ['', Validators.required],
       ign: ['']
-    }, {validators: this.updateConfirmValidator});
+    });
   }
 
   submitForm() {
     if(!this.validateForm.invalid) {
       this.user = this.validateForm.value;
-
       this.auhtFacade.register(this.user).subscribe(() => {});
       this.closeModal();
 

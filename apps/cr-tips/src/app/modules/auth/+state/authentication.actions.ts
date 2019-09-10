@@ -6,7 +6,9 @@ export enum AuthenticationActionTypes {
   Login = '[Authentication] Authentication Loaded',
   Logout = '[Authentication] Authentication Load Error',
   Registered = '[Authentication] Authentication Load Error',
-  Logged = ""
+  Logged = '[Authentication] Logged',
+  RegisterFormSubmit = '[Authentication] Register Form Submitted',
+  LoginFormSubmit = '[Authentication] Login Form Submitted'
 }
 
 export class Register implements Action {
@@ -32,11 +34,22 @@ export class Logout implements Action {
   readonly type = AuthenticationActionTypes.Logout;
 }
 
+export class RegisterFormSubmit implements Action {
+  readonly type = AuthenticationActionTypes.RegisterFormSubmit;
+}
+
+export class LoginFormSubmit implements Action {
+  readonly type = AuthenticationActionTypes.LoginFormSubmit;
+}
+
 export type AuthenticationAction =
   | Register
   | Login
   | Logged
   | Logout
-  |Registered;
+  | Registered
+  | RegisterFormSubmit
+  | LoginFormSubmit
+  ;
 
 

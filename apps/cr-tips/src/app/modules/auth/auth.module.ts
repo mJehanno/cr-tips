@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterDialogComponent } from './register-dialog/register-dialog.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NzIconModule } from 'ng-zorro-antd';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -18,6 +18,7 @@ import { AuthenticationFacade } from './+state/authentication.facade';
   imports: [
     CommonModule,
     NgZorroAntdModule,
+    NzIconModule,
     ReactiveFormsModule,
     StoreModule.forFeature('auth', authenticationReducer, {
       initialState: authenticationInitialState

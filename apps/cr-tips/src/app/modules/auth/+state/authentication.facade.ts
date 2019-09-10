@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 
 
 import { authenticationQuery } from './authentication.selectors';
-import { Register, Logged, Logout } from './authentication.actions';
+import { Register, Logged, Logout, RegisterFormSubmit, LoginFormSubmit } from './authentication.actions';
 import { from, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '@cr-tips/data';
@@ -36,6 +36,14 @@ export class AuthenticationFacade {
 
   public logout() {
     this.store.dispatch(new Logout());
+  }
+
+  public registerSubmitted() {
+    this.store.dispatch(new RegisterFormSubmit());
+  }
+
+  public loginSubmitted() {
+    this.store.dispatch(new LoginFormSubmit());
   }
 
 }

@@ -48,7 +48,7 @@ export class LoginDialogComponent implements OnInit {
 
 
   closeModal() {
-    this.modal.destroy()
+    this.modal.destroy();
   }
 
 }

@@ -20,7 +20,15 @@ const getSelectedId = createSelector(
   (state: AuthenticationState) => state.selectedId
 );
 
+const getLoginSubmitted = createSelector(
+  getAuthenticationState,
+  (state: AuthenticationState) => state.loginSubmitted
+)
 
+const getRegisterSubmitted = createSelector(
+  getAuthenticationState,
+  (state: AuthenticationState) => state.registerSubmitted
+)
 
 const getUser = createSelector(getAuthenticationState, (state) => {
   return state.user;

@@ -21,11 +21,15 @@ export interface AuthenticationState {
   selectedId?: string | number; // which Authentication record has been selected
   loaded: boolean; // has the Authentication list been loaded
   error?: any; // last none error (if any)
+  loginSubmitted?: boolean;
+  registerSubmitted?: boolean;
 }
 
 export const initialState: AuthenticationState = {
   user: null,
-  loaded: false
+  loaded: false,
+  loginSubmitted: false,
+  registerSubmitted: false
 };
 
 export function authenticationReducer(
@@ -36,9 +40,12 @@ export function authenticationReducer(
 
     case AuthenticationActionTypes.Logged:
       return {...state, user : action.payload}
-    break;
     case AuthenticationActionTypes.Logout:
-      return {...state, user: null}
+      return {...state, user: null, loginSubmitted: false, registerSubmitted: false}
+    case AuthenticationActionTypes.RegisterFormSubmit:
+      return {...state, registerSubmitted: true}
+    case AuthenticationActionTypes.LoginFormSubmit:
+      return {...state, loginSubmitted: true}
     default:
       return state;
 
