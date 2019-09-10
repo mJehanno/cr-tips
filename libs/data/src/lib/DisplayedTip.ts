@@ -9,5 +9,6 @@ export interface DisplayedTip {
     content: string;
     commentaries?: Commentary[];
     score: number;
-
+    game_mode?: string;
+    category?: string;
 }
