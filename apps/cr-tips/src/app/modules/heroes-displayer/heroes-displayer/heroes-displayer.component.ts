@@ -108,7 +108,7 @@ export class HeroesDisplayerComponent implements OnInit, OnDestroy {
         this.furryClicked = !this.furryClicked;
         break;
       case 'Goblin':
-        this.goblinClicked = !this.furryClicked;
+        this.goblinClicked = !this.goblinClicked;
         break;
       case 'Elf':
         this.elfClicked = !this.elfClicked;
