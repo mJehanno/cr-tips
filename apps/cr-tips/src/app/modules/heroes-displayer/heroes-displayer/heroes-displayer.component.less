@@ -88,8 +88,13 @@ nz-card-meta{
   }
 }
 
-img.active{
-  border: 3px solid yellow;
+.icon-container img{
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  &.active{
+    filter: unset;
+    -webkit-filter: unset;
+  }
 }
 
 
