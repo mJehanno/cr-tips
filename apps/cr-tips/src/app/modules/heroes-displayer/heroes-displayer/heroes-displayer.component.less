@@ -23,13 +23,6 @@ nz-card {
   margin-top: 1em;
 }
 
-.icon-container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-}
-
 .content-container{
     display: flex;
   flex-direction: row;
@@ -40,6 +33,16 @@ nz-card-meta{
   display: flex;
   flex-direction: column;
 }
+
+
+
+
+nz-card-meta{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 
 .common{
   border-color: darkgray;
@@ -87,15 +90,3 @@ nz-card-meta{
     color: white;
   }
 }
-
-.icon-container img{
-  filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
-  &.active{
-    filter: unset;
-    -webkit-filter: unset;
-  }
-}
-
-
-

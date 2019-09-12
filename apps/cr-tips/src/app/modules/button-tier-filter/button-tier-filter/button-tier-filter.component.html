@@ -1,0 +1,4 @@
+<button
+    (click)="isActive = !isActive"
+    [class.active]="isActive"
+    [ngClass]="tier" nz-button>{{_.capitalize(tier)}}</button>

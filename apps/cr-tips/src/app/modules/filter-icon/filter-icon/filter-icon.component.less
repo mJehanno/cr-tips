@@ -1,0 +1,16 @@
+.icon-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+
+  & img{
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    &.active{
+      filter: unset;
+      -webkit-filter: unset;
+    }
+  }
+
+}

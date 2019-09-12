@@ -7,5 +7,5 @@ export interface Hero {
   tier: string; // []
   ability: string;
   image?: string;
-  avat?: string;
+  avatar?: string;
 }

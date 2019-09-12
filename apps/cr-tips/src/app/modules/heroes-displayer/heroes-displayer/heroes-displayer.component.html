@@ -1,213 +1,50 @@
 <div class="button-container">
   <h3>Filter By :</h3>
   <div class="race-filterer">
-    <div class="icon-container" >
-      <img
-      src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fraces%2FHuman_icon.jpg?alt=media&token=59a696ae-905e-438f-aee0-bf622b5ea87e"
-      (click)="filterData('Human')"
-      [ngClass]="humanClicked ? 'active' : null"
-      >
-      <span>Human</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fraces%2FUndead_icon.jpg?alt=media&token=0428999d-c66f-4b2b-978d-edffc277bc0b"
-        (click)="filterData('Undead')"
-        [ngClass]="undeadClicked ? 'active' : null"
-        >
-        <span>Undead</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fraces%2FFurry_icon.jpg?alt=media&token=5461ac2d-882a-463f-b36e-5130243d2b31"
-        (click)="filterData('Furry')"
-        [ngClass]="furryClicked ? 'active' : null"
-        >
-        <span>Furry</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fraces%2FGoblin_icon.jpg?alt=media&token=48e35c5d-a8d8-4484-a60c-b96032c56de5"
-        (click)="filterData('Goblin')"
-        [ngClass]="goblinClicked ? 'active' : null"
-        >
-        <span>Goblin</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fraces%2FElf_icon.jpg?alt=media&token=9651cf23-d1dd-445e-9cf0-2113d16aa3ac"
-        (click)="filterData('Elf')"
-        [ngClass]="elfClicked ? 'active' : null"
-        >
-        <span>Elf</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fraces%2FDemon_icon.jpg?alt=media&token=0fc02ebd-af5d-4ac4-b043-f46f3b502003"
-        (click)="filterData('Demon')"
-        [ngClass]="demonClicked ? 'active' : null"
-        >
-        <span>Demon</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fraces%2FOceanborn_icon.jpg?alt=media&token=4f209f95-642d-45a6-ba59-777f6d15e2ea"
-        (click)="filterData('Oceanborn')"
-        [ngClass]="oceanClicked ? 'active' : null"
-        >
-        <span>Oceanborn</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fraces%2FCyborg_icon.jpg?alt=media&token=6aa218dd-1406-4709-9b0a-936104f2dc47"
-        (click)="filterData('Cyborg')"
-        [ngClass]="cyborgClicked ? 'active' : null"
-        >
-        <span>Cyborg</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fraces%2FDragon_icon.jpg?alt=media&token=c84c33e0-a04c-41a0-ac69-56838fa0077a"
-        (click)="filterData('Dragon')"
-        [ngClass]="dragonClicked ? 'active' : null"
-        >
-        <span>Dragon</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fraces%2FJelly_icon.jpg?alt=media&token=f5583ac9-61e0-4eea-ba51-e4b934d3d6e8"
-        (click)="filterData('Jelly')"
-        [ngClass]="jellyClicked ? 'active' : null"
-        >
-        <span>Jelly</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fraces%2FVoid_icon.jpg?alt=media&token=89953cc4-ba2f-4969-8ff8-16ae0e13f9cf"
-        (click)="filterData('Void')"
-        [ngClass]="voidClicked ? 'active' : null"
-        >
-        <span>Void</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fraces%2FBeast_icon.jpg?alt=media&token=7cdcdf8f-161f-40ef-8f8b-b70289c8ca57"
-        (click)="filterData('Beast')"
-        [ngClass]="beastClicked ? 'active' : null"
-        >
-        <span>Beast</span>
-    </div>
+    <cr-tips-filter-icon *ngFor="let race of races" [iconSrc]="race.icon" [value]="race.name" (click)="filterData(race.name)"></cr-tips-filter-icon>
   </div>
   <div class="class-filterer">
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fclasses%2FSorcerer_icon.png?alt=media&token=cfff6010-c89d-4347-93d8-62966632ff87"
-        (click)="filterData('Sorcerer')"
-        [ngClass]="sorcererClicked ? 'active' : null"
-        >
-        <span>Sorcerer</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fclasses%2FWarrior_icon.png?alt=media&token=1838f2cd-aed9-4e8e-a801-acc99c9aee84"
-        (click)="filterData('Warrior')"
-        [ngClass]="warriorClicked ? 'active' : null"
-        >
-        <span>Warrior</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fclasses%2FHunter_icon.png?alt=media&token=b6f202e4-b3e6-476f-ae2d-8048c971ff61"
-        (click)="filterData('Hunter')"
-        [ngClass]="hunterClicked ? 'active' : null"
-        >
-        <span>Hunter</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fclasses%2FRider_icon.png?alt=media&token=c91dc7cb-fb88-48af-beb2-bb23a664903b"
-        (click)="filterData('Rider')"
-        [ngClass]="riderClicked ? 'active' : null"
-        >
-        <span>Rider</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fclasses%2FWarlock_icon.png?alt=media&token=4f00a0bc-6303-4f69-8a9b-7d1c2e9b4d77"
-        (click)="filterData('Warlock')"
-        [ngClass]="warlockClicked ? 'active' : null"
-        >
-        <span>Warlock</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fclasses%2FDruid_icon.png?alt=media&token=f653711c-1a66-45e1-950d-aa9fd054afaf"
-        (click)="filterData('Druid')"
-        [ngClass]="druidClicked ? 'active' : null"
-        >
-        <span>Druid</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fclasses%2FAssassin_icon.png?alt=media&token=56d2d6f6-3484-47d9-a1bb-00d78817e82d"
-        (click)="filterData('Assassin')"
-        [ngClass]="assassinClicked ? 'active' : null"
-        >
-        <span>Assassin</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fclasses%2FEngineer_icon.png?alt=media&token=af1a5a4f-b636-499a-b931-22871b142c2d"
-        (click)="filterData('Engineer')"
-        [ngClass]="engineerClicked ? 'active' : null"
-        >
-        <span>Engineer</span>
-    </div>
-    <div class="icon-container">
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/cr-tips.appspot.com/o/icons%2Fclasses%2FPunisher_icon.png?alt=media&token=52d9a903-a936-403d-a853-14706b0729ad"
-        (click)="filterData('Punisher')"
-        [ngClass]="punisherClicked ? 'active' : null"
-        >
-        <span>Punisher</span>
-    </div>
+    <cr-tips-filter-icon *ngFor="let class of classes" [iconSrc]="class.icon" [value]="class.name" (click)="filterData(class.name)"></cr-tips-filter-icon>
   </div>
   <div class="tier-filterer">
-    <button
-    (click)="filterData('common')"
-    [ngClass]="commonClicked ? 'active' : null"
-    class="common" nz-button>Common</button>
-    <button
-    (click)="filterData('uncommon')"
-    [ngClass]="uncommonClicked ? 'active' : null"
-    class="uncommon" nz-button>Uncommon</button>
-    <button
-    (click)="filterData('rare')"
-    [ngClass]="rareClicked ? 'active' : null"
-    class="rare" nz-button>Rare</button>
-    <button
-    (click)="filterData('epic')"
-    [ngClass]="epicClicked ? 'active' : null"
-    class="epic" nz-button>Epic</button>
-    <button
-    (click)="filterData('legendary')"
-    [ngClass]="legendaryClicked ? 'active' : null"
-    class="legendary" nz-button>Legendary</button>
+    <cr-tips-button-tier-filter *ngFor="let tier of tiers" [tier]="tier" (click)="filterData(tier)"></cr-tips-button-tier-filter>
   </div>
 </div>
 <div class="card-container">
-  <nz-card [nzHoverable]="true" *ngFor="let hero of heroes" [nzExtra]="'mana : ' + hero.manaCost" [nzTitle]="hero.name" [nzCover]="coverTemplate" [ngClass]="hero.tier">
-    <div class="content-container">
-      <div class="class-container">
-          <nz-card-meta class="classes" *ngFor="let class of hero.classes" [nzDescription]="class"></nz-card-meta>
+  <nz-card [nzHoverable]="true" *ngFor="let hero of heroes" [nzExtra]=""  [nzCover]="coverTemplate" [ngClass]="hero.tier"
+  [nzActions]="[actionDetail]"
+  >
+
+    <nz-card-meta
+      [nzTitle]="hero.name"
+      [nzDescription]="'cost : ' + hero.manaCost"
+      [nzAvatar]="avatarTemplate"
+    ></nz-card-meta>
+    <ng-template #avatarTemplate>
+      <img [src]="hero.avatar" width="64px">
+    </ng-template>
+
+
+
+
+    <nz-modal #modal [nzVisible]="modalVisible">
+      <div class="content-container">
+        <div class="class-container">
+            <nz-card-meta class="classes" *ngFor="let class of hero.classes" [nzDescription]="class"></nz-card-meta>
+        </div>
+        <div class="race-container">
+            <nz-card-meta class="races" *ngFor="let race of hero.race" [nzDescription]="race" [ngClass]="race"></nz-card-meta>
+        </div>
       </div>
-      <div class="race-container">
-          <nz-card-meta class="races" *ngFor="let race of hero.race" [nzDescription]="race" [ngClass]="race"></nz-card-meta>
-      </div>
-    </div>
+    </nz-modal>
+
+    <ng-template #actionDetail>
+      <i nz-icon nzType="eye" (click)="modalVisible = true" ></i>
+    </ng-template>
     <ng-template #coverTemplate>
       <img alt="example" [src]="hero.image" *ngIf="hero.image !== undefined" />
       <p *ngIf="hero.image === undefined">No picture Avalaible</p>
     </ng-template>
   </nz-card>
 </div>
+

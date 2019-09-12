@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Hero } from '@cr-tips/data';
+import { Hero, Race, Class } from '@cr-tips/data';
 import { HeroesService } from '../../../core/database/heroes.service';
+import { RaceService } from '../../../core/database/race.service';
+import { ClassService } from '../../../core/database/class.service';
 
 @Component({
   selector: 'cr-tips-heroes-displayer',
@@ -9,37 +11,22 @@ import { HeroesService } from '../../../core/database/heroes.service';
 })
 export class HeroesDisplayerComponent implements OnInit, OnDestroy {
 
+  races: Race[] = [];
+  classes: Class[] = [];
   heroes: Hero[] = [];
+  tiers = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
+
   currentFilter = new Set();
-  humanClicked = false;
-  undeadClicked = false;
-  furryClicked = false;
-  goblinClicked = false;
-  elfClicked = false;
-  demonClicked = false;
-  oceanClicked = false;
-  cyborgClicked = false;
-  dragonClicked = false;
-  jellyClicked = false;
-  voidClicked = false;
-  beastClicked = false;
-  sorcererClicked = false;
-  warriorClicked = false;
-  hunterClicked = false;
-  riderClicked = false;
-  warlockClicked = false;
-  druidClicked = false;
-  assassinClicked = false;
-  engineerClicked = false;
-  punisherClicked = false;
+
   commonClicked = false;
   uncommonClicked = false;
   rareClicked = false;
   epicClicked = false;
   legendaryClicked = false;
-  // humanClicked = false;
 
-  constructor(private heroesService: HeroesService ) { }
+  modalVisible = false;
+
+  constructor(private heroesService: HeroesService, private raceService: RaceService, private classService: ClassService ) { }
 
   ngOnInit() {
 
@@ -57,6 +44,14 @@ export class HeroesDisplayerComponent implements OnInit, OnDestroy {
       });
       localStorage.setItem('heroes', JSON.stringify(this.heroes))
     });
+
+    this.raceService.getAllRaces().subscribe((data) => {
+      this.races = data;
+    })
+
+    this.classService.getAllClasses().subscribe((data) => {
+      this.classes = data;
+    })
 
   }
 
@@ -98,69 +93,6 @@ export class HeroesDisplayerComponent implements OnInit, OnDestroy {
 
   toggleFilter(feat: string) {
     switch(feat) {
-      case 'Human':
-        this.humanClicked = !this.humanClicked;
-      break;
-      case 'Undead':
-        this.undeadClicked = !this.undeadClicked;
-        break;
-      case 'Furry':
-        this.furryClicked = !this.furryClicked;
-        break;
-      case 'Goblin':
-        this.goblinClicked = !this.goblinClicked;
-        break;
-      case 'Elf':
-        this.elfClicked = !this.elfClicked;
-        break;
-      case 'Demon':
-        this.demonClicked = !this.demonClicked;
-        break;
-      case 'Oceanborn':
-        this.oceanClicked = !this.oceanClicked;
-        break;
-      case 'Cyborg':
-        this.cyborgClicked = !this.cyborgClicked;
-        break;
-      case 'Dragon':
-        this.dragonClicked = !this.dragonClicked;
-        break;
-      case 'Jelly':
-        this.jellyClicked = !this.jellyClicked;
-        break;
-      case 'Void':
-        this.voidClicked = !this.voidClicked;
-        break;
-      case 'Beast':
-        this.beastClicked = !this.beastClicked;
-        break;
-      case 'Sorcerer':
-        this.sorcererClicked = !this.sorcererClicked;
-        break;
-      case 'Warrior':
-        this.warriorClicked = !this.warriorClicked;
-        break;
-      case 'Hunter':
-        this.hunterClicked = !this.hunterClicked;
-        break;
-      case 'Rider':
-        this.riderClicked = !this.riderClicked;
-        break;
-      case 'Warlock':
-        this.warlockClicked = !this.warlockClicked;
-        break;
-      case 'Druid':
-        this.druidClicked = !this.druidClicked;
-        break;
-      case 'Assassin':
-        this.assassinClicked = !this.assassinClicked;
-        break;
-      case 'Engineer':
-        this.engineerClicked = !this.engineerClicked;
-        break;
-      case 'Punisher':
-        this.punisherClicked = this.punisherClicked;
-        break;
       case 'uncommon':
         this.uncommonClicked = !this.uncommonClicked;
         break;

@@ -1,0 +1,8 @@
+<div class="icon-container" >
+  <img
+  [src]="iconSrc"
+  (click)="isActive = !isActive"
+  [ngClass]="isActive ? 'active' : null"
+  >
+  <span>{{value}}</span>
+</div>
