@@ -11,9 +11,14 @@
   flex-wrap: wrap;
 }
 
-nz-card {
-  margin: 1em;
+nz-card{
   width: 25%;
+  margin: 2em;
+  padding: 0.5em;
+  cursor: unset;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .button-container .race-filterer, .button-container .class-filterer, .button-container .tier-filterer{
@@ -23,18 +28,6 @@ nz-card {
   margin-top: 1em;
 }
 
-.content-container{
-    display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-nz-card-meta{
-  display: flex;
-  flex-direction: column;
-}
-
-
 
 
 nz-card-meta{
@@ -44,7 +37,7 @@ nz-card-meta{
 }
 
 
-.common{
+::ng-deep .common{
   border-color: darkgray;
   border-width: 3px;
   &.active {
@@ -53,7 +46,7 @@ nz-card-meta{
   }
 }
 
-.uncommon{
+::ng-deep .uncommon{
   border-color: darkcyan;
   border-width: 3px;
 
@@ -64,7 +57,7 @@ nz-card-meta{
 
 }
 
-.rare{
+::ng-deep  .rare{
   border-color: darkblue;
   border-width: 3px;
   &.active {
@@ -73,7 +66,7 @@ nz-card-meta{
   }
 }
 
-.epic{
+::ng-deep .epic{
   border-color: darkviolet;
   border-width: 3px;
   &.active {
@@ -82,7 +75,7 @@ nz-card-meta{
   }
 }
 
-.legendary{
+::ng-deep .legendary{
   border-color: orangered;
   border-width: 3px;
   &.active {

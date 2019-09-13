@@ -1,13 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Hero, Race, Class } from '@cr-tips/data';
 import { HeroesService } from '../../../core/database/heroes.service';
 import { RaceService } from '../../../core/database/race.service';
 import { ClassService } from '../../../core/database/class.service';
+import { NzModalService } from 'ng-zorro-antd';
+import { HeroDetailModalComponent } from '../../hero-detail-modal/hero-detail-modal/hero-detail-modal.component';
 
 @Component({
   selector: 'cr-tips-heroes-displayer',
   templateUrl: './heroes-displayer.component.html',
-  styleUrls: ['./heroes-displayer.component.less']
+  styleUrls: ['./heroes-displayer.component.less'],
 })
 export class HeroesDisplayerComponent implements OnInit, OnDestroy {
 
@@ -26,7 +28,8 @@ export class HeroesDisplayerComponent implements OnInit, OnDestroy {
 
   modalVisible = false;
 
-  constructor(private heroesService: HeroesService, private raceService: RaceService, private classService: ClassService ) { }
+  constructor(private heroesService: HeroesService, private raceService: RaceService, private classService: ClassService,
+    private modalService: NzModalService) { }
 
   ngOnInit() {
 
@@ -109,6 +112,17 @@ export class HeroesDisplayerComponent implements OnInit, OnDestroy {
         this.legendaryClicked = !this.legendaryClicked;
         break;
     }
+  }
+
+  openModal(hero: Hero) {
+    this.modalService.create({
+      nzTitle: hero.name,
+      nzContent: HeroDetailModalComponent,
+      nzComponentParams: {
+        hero
+      },
+
+    })
   }
 
 

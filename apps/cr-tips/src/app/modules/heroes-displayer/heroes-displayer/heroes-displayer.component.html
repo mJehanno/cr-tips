@@ -26,20 +26,8 @@
 
 
 
-
-    <nz-modal #modal [nzVisible]="modalVisible">
-      <div class="content-container">
-        <div class="class-container">
-            <nz-card-meta class="classes" *ngFor="let class of hero.classes" [nzDescription]="class"></nz-card-meta>
-        </div>
-        <div class="race-container">
-            <nz-card-meta class="races" *ngFor="let race of hero.race" [nzDescription]="race" [ngClass]="race"></nz-card-meta>
-        </div>
-      </div>
-    </nz-modal>
-
     <ng-template #actionDetail>
-      <i nz-icon nzType="eye" (click)="modalVisible = true" ></i>
+      <i nz-icon nzType="eye" (click)="openModal(hero)" ></i>
     </ng-template>
     <ng-template #coverTemplate>
       <img alt="example" [src]="hero.image" *ngIf="hero.image !== undefined" />
@@ -47,4 +35,7 @@
     </ng-template>
   </nz-card>
 </div>
+
+
+
 

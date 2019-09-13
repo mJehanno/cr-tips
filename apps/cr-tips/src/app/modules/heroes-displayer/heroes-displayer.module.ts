@@ -4,6 +4,8 @@ import { HeroesDisplayerComponent } from './heroes-displayer/heroes-displayer.co
 import { NzCardModule, NzButtonModule, NzTabsModule, NzIconModule, NzModalModule } from 'ng-zorro-antd';
 import { FilterIconModule } from '../filter-icon/filter-icon.module';
 import { ButtonTierFilterModule } from '../button-tier-filter/button-tier-filter.module';
+import { HeroDetailModalModule } from '../hero-detail-modal/hero-detail-modal.module';
+import { HeroDetailModalComponent } from '../hero-detail-modal/hero-detail-modal/hero-detail-modal.component';
 
 @NgModule({
   declarations: [HeroesDisplayerComponent],
@@ -15,8 +17,10 @@ import { ButtonTierFilterModule } from '../button-tier-filter/button-tier-filter
     NzIconModule,
     NzModalModule,
     FilterIconModule,
-    ButtonTierFilterModule
+    ButtonTierFilterModule,
+    HeroDetailModalModule
   ],
-  exports: [HeroesDisplayerComponent]
+  exports: [HeroesDisplayerComponent],
+  entryComponents: [HeroDetailModalComponent]
 })
 export class HeroesDisplayerModule { }

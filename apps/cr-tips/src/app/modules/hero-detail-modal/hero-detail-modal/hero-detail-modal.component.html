@@ -1,0 +1,12 @@
+<nz-divider nzText="Belonging"></nz-divider>
+<div class="content-container">
+  <div class="class-container">
+      <span class="classes" *ngFor="let class of hero.classes">{{class}}</span>
+  </div>
+  <div class="race-container">
+      <span class="races" *ngFor="let race of hero.race" [ngClass]="race">{{race}}</span>
+  </div>
+</div>
+<nz-divider nzText="Skill"></nz-divider>
+<div>test</div>
+<nz-divider nzText="Stats"></nz-divider>
