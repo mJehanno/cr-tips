@@ -1,3 +1,6 @@
+import { Skill } from './Skill';
+import { Stat } from './Stat';
+
 export interface Hero {
   idHeroes: string;
   name: string;
@@ -5,7 +8,9 @@ export interface Hero {
   race: string[];
   classes : string[];
   tier: string; // []
-  ability: string;
+  ability: Skill;
   image?: string;
   avatar?: string;
+  stats: Stat[];
+  isActive: boolean;
 }

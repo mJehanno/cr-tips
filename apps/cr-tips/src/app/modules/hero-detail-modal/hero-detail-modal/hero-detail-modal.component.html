@@ -1,12 +1,57 @@
 <nz-divider nzText="Belonging"></nz-divider>
 <div class="content-container">
   <div class="class-container">
+      <h3>Class(es) : </h3>
       <span class="classes" *ngFor="let class of hero.classes">{{class}}</span>
   </div>
   <div class="race-container">
+      <h3>Race(s) : </h3>
       <span class="races" *ngFor="let race of hero.race" [ngClass]="race">{{race}}</span>
   </div>
 </div>
 <nz-divider nzText="Skill"></nz-divider>
-<div>test</div>
+<div class="skill-container">
+  <div>
+    <img [src]="hero.skill.icon" width="64px">
+    <span>{{hero.skill.name}}</span>
+  </div>
+  <span><strong>Description :</strong> {{hero.skill.description}}</span>
+  <span><strong>Cooldown :</strong> {{hero.skill.cooldown}}</span>
+</div>
 <nz-divider nzText="Stats"></nz-divider>
+<nz-table #statTable [nzData]="hero.stats" [nzFrontPagination]="false">
+    <thead>
+        <tr>
+          <th>Stat</th>
+          <th><i nz-icon [nzType]="'star'"></i></th>
+          <th><i nz-icon [nzType]="'star'"></i><i nz-icon [nzType]="'star'"></i></th>
+          <th><i nz-icon [nzType]="'star'"></i><i nz-icon [nzType]="'star'"></i><i nz-icon [nzType]="'star'"></i></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stat of statTable.data">
+          <td>{{stat.name}}</td>
+          <td>{{stat.value}}</td>
+          <td>{{stat.name === 'hp' || stat.name === 'damage' ?  stat.value * 2 : stat.value }}</td>
+          <td>{{stat.name === 'hp' || stat.name === 'damage' ?  stat.value * 4 : stat.value }}</td>
+        </tr>
+      </tbody>
+</nz-table>
+
+
+<!--
+<div class="stat-container" *ngIf="hero.stats">
+  <div class="stat-block">
+    <div *ngFor="let stat of hero.stats">
+      <span><strong>{{stat.name}} : </strong></span>
+      <span>{{stat.value}}</span>
+  </div>
+  </div>
+  <nz-divider nzType="vertical"></nz-divider>
+  <div  class="stat-block">
+    <div  *ngFor="let stat of hero.stats">
+      <span>{{stat.value * 2}}</span>
+    </div>
+  </div>
+</div>-->
+

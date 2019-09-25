@@ -20,8 +20,9 @@
       [nzDescription]="'cost : ' + hero.manaCost"
       [nzAvatar]="avatarTemplate"
     ></nz-card-meta>
-    <ng-template #avatarTemplate>
-      <img [src]="hero.avatar" width="64px">
+    <ng-template #avatarTemplate >
+      <img [src]="hero.avatar" width="64px" *ngIf="hero.avatar !== undefined">
+      <nz-skeleton *ngIf="hero.avatar === undefined" nzParagraph="false" [nzAvatar]="true"></nz-skeleton>
     </ng-template>
 
 

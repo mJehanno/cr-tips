@@ -3,3 +3,30 @@
 flex-direction: row;
 justify-content: space-between;
 }
+
+.race-container, .class-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-container{
+  display: flex;
+  flex-direction: column;
+
+  & div {
+    & img {
+      margin-right: 2em;
+    }
+  }
+}
+
+.stat-container{
+  display: flex;
+  flex-direction: row;
+
+  & .stat-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+}
