@@ -35,7 +35,7 @@ export class TipEffect{
         return this.tipService.getAll();
       }),
       map((tips) => {
-        console.log(tips)
+        //console.log(tips)
         localStorage.setItem('tips', JSON.stringify(tips));
         return from(tips)
       }),
@@ -51,7 +51,9 @@ export class TipEffect{
           tip.date = new Date(tip.date['seconds'] * 1000);
           return tip
         })
+
         const disTips = tips.map((tip) => {
+          console.log(user);
           if(tip.author === user[0].idUser) {
             return {idTips: tip.idTips, authorUser: user[0], date: tip.date, title: tip.title,
               description: tip.description, content: tip.content, commentaries: tip.commentaries, score: tip.score,
@@ -85,19 +87,3 @@ export class TipEffect{
 }
 
 
-
-
-// return this.tipService.getAll()
-//const data = element.data()
-//const fdate = data['date'] as firestore.Timestamp;
-//const date = fdate.toDate();
-// return {authorUser: user[0], content: data['content'], date,
-//title: data['title'], description: data['description'], score: data['score'] }
-/**
- *
- * this.userService.retrieveFromToken(data['author']).pipe(map(user=> {
-              console.log('ok');
-              return {authorUser: user[0], content: data['content'], date, title: data['title'], description: data['description'], score: data['score'] }
-            }))
- *
-*/

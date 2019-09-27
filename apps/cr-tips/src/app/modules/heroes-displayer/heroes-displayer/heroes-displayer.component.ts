@@ -121,6 +121,7 @@ export class HeroesDisplayerComponent implements OnInit, OnDestroy {
       nzComponentParams: {
         hero
       },
+      nzFooter: null
 
     })
   }

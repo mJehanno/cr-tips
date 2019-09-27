@@ -16,12 +16,12 @@ export class TipsService {
 
   public getAll() {
     return this.af.collection<Tip>('tips', ref => ref.orderBy('date', 'desc')).valueChanges({idField: 'idTips'})
-    .pipe(
+    /*.pipe(
       map(snaps => snaps.map(snap => {
         const tip: Tip = snap;
         return tip;
       }))
-    )
+    )*/
   }
 
 
