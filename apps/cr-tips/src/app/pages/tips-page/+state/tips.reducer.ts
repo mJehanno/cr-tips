@@ -11,7 +11,7 @@ export interface TipState{
 
 export const initialTipState: TipState = {
   tips : [],
-  displayedTip: [],
+  displayedTip: [{authorUser: {email:''}, date: new Date(), content: '', score: 0,  title: ''}],
   gotTipsFromDb: false,
   selectedTip: {authorUser: {email:''}, date: new Date(), content: '', score: 0,  title: ''}
 }

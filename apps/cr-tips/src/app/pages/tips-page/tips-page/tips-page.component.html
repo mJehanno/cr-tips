@@ -26,7 +26,7 @@
       <td>{{_.capitalize(tip.game_mode)}}</td>
       <td>{{_.capitalize(tip.category)}}</td>
       <td class="action">
-        <a [routerLink]="" (click)="selectTip(tip)"><i nz-icon [nzType]="'eye'"*ngIf="tip !== undefined"></i></a>
+        <a [routerLink]="tip.idTips" (click)="selectTip(tip)"><i nz-icon [nzType]="'eye'"*ngIf="tip !== undefined"></i></a>
         <i nz-icon *ngIf="currentUser && currentUser.idUser === tip.authorUser.idUser" [nzType]="'edit'"></i>
       </td>
     </tr>

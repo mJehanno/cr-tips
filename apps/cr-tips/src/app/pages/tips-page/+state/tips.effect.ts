@@ -1,14 +1,12 @@
-import { Injectable, ɵConsole } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { TipsService } from '../../../core/database/tips.service';
 import { Actions, ofType, Effect } from '@ngrx/effects';
-import { AddTipAction, TipsActionType, AddedTipAction, GotAllTipAction, GetAllTipAction, DisplayingTipAction, GetTipDetailAction, GotDetailTipAction } from './tips.action';
-import { switchMap, map, flatMap, concatMap, expand, mergeMap, mergeAll, concatAll, switchAll, tap, combineAll } from 'rxjs/operators';
-import { Tip, DisplayedTip } from '@cr-tips/data';
-import {firestore} from 'firebase'
+import { AddTipAction, TipsActionType, AddedTipAction, GotAllTipAction, GetAllTipAction, GetTipDetailAction, GotDetailTipAction } from './tips.action';
+import { switchMap, map } from 'rxjs/operators';
+import { Tip } from '@cr-tips/data';
 import { UserService } from '../../../core/database/user.service';
-import { forkJoin, pipe, from } from 'rxjs';
-import { Logged } from '../../../modules/auth/+state/authentication.actions';
-import { Title } from '@angular/platform-browser';
+
+
 
 
 @Injectable()
@@ -20,6 +18,8 @@ export class TipEffect{
     private userService: UserService
   ) {}
 
+
+  tips = [];
 
   @Effect() addTip$ = this.actions$.pipe(
     ofType<AddTipAction>(TipsActionType.AddTipAction),
@@ -34,35 +34,7 @@ export class TipEffect{
       switchMap(() => {
         return this.tipService.getAll();
       }),
-      map((tips) => {
-        //console.log(tips)
-        localStorage.setItem('tips', JSON.stringify(tips));
-        return from(tips)
-      }),
-      mergeMap((tip$) => {
-        return tip$
-      }),
-      map((tip) =>  this.userService.retrieveFromToken(tip.author)),
-      map(user$ => user$),
-      mergeMap(user =>  user),
-      map(user => {
-        const tips = JSON.parse(localStorage.getItem('tips'));
-        tips.map(tip => {
-          tip.date = new Date(tip.date['seconds'] * 1000);
-          return tip
-        })
-
-        const disTips = tips.map((tip) => {
-          console.log(user);
-          if(tip.author === user[0].idUser) {
-            return {idTips: tip.idTips, authorUser: user[0], date: tip.date, title: tip.title,
-              description: tip.description, content: tip.content, commentaries: tip.commentaries, score: tip.score,
-              game_mode: tip.game_mode, category: tip.category }
-          }
-        })
-        return disTips;
-      }),
-      map((tips) => new GotAllTipAction(tips))
+      map((tips) => {console.log(tips); return new GotAllTipAction(tips)} )
   );
 
   @Effect() getTip$ = this.actions$.pipe(

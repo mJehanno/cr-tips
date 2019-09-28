@@ -20,7 +20,7 @@ import * as _ from 'lodash';
 export class TipsPageComponent implements OnInit {
   _ = _;
   currentUser: User = null;
-  tips: any[] = [];
+  tips: DisplayedTip[] = [];
 
   constructor(private store: Store<AuthenticationState>, private tipStore: Store<TipState>,
     private tipFace: TipsFacade, private userService: UserService, private tipService: TipsService) { }
