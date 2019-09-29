@@ -14,9 +14,12 @@ export class TipsService {
 
   constructor( private af: AngularFirestore, private userService: UserService) { }
 
+  /**
+  * TODO : Refactor this to prevent memory leak (nested subscribe).
+  */
   public getAll(): Observable<any[]> {
-    let users = {} ;
-    let loadedTips = {};
+    const users = {} ;
+    const loadedTips = {};
     const subject = new Subject<any[]>();
     this.af.collection('users').get().subscribe((user) => {
       user.forEach((doc) => {
