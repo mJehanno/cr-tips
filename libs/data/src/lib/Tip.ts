@@ -10,6 +10,6 @@ export interface Tip {
   content: string;
   commentaries?: Commentary[];
   score: number;
-  game_mode?: string;
-  category?: string;
+  game_mode?: string[];
+  category?: string[];
 }

@@ -19,7 +19,8 @@
       style="width: 200px;"
       nzShowSearch
       nzAllowClear
-      [(ngModel)]="category"
+      nzMode="tags"
+      [nzMaxTagCount]="2"
       >
       <nz-option nzValue="economy" nzLabel="Economy"></nz-option>
       <nz-option nzValue="strategy" nzLabel="Strategy"></nz-option>
@@ -30,14 +31,18 @@
     <nz-form-label nzRequired nzFor="game_mode">Game Mode</nz-form-label>
     <nz-select formControlName="game_mode" id="game_mode" nzPlaceHolder="Game mode" nzRequired style="width: 200px;"
       nzShowSearch
-      [(ngModel)]="gameMode"
+      [nzMaxTagCount]="4"
+      nzMode="tags"
+      [nzMaxTagPlaceholder]="tagPlaceHolder"
       nzAllowClear>
+        <nz-option ></nz-option>
         <nz-option nzValue="classic" nzLabel="Classic"></nz-option>
         <nz-option nzValue="turbo" nzLabel="Turbo"></nz-option>
         <nz-option nzValue="coop" nzLabel="Coop"></nz-option>
         <nz-option nzValue="squad" nzLabel="Squad"></nz-option>
-        <nz-option nzValue="any" nzLabel="Any"></nz-option>
+        <nz-option nzValue="other" nzLabel="Other"></nz-option>
     </nz-select>
+    <ng-template #tagPlaceHolder let-selectedList> and {{ selectedList.length }} more selected </ng-template>
   </div>
   <quill-editor formControlName="content"></quill-editor>
   <div class="form-button">

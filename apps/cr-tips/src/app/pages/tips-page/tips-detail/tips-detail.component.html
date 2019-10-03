@@ -4,8 +4,8 @@
     <h2>{{tip.description}}</h2>
   </div>
   <div>
-    <nz-tag [nzColor]="'#87d068'">{{tip.category}}</nz-tag>
-    <nz-tag [nzColor]="'#108ee9'">{{tip.game_mode}}</nz-tag>
+    <nz-tag [ngClass]="tip.game_mode">{{tip.game_mode}}</nz-tag>
+    <nz-tag [ngClass]="tip.category">{{tip.category}}</nz-tag>
   </div>
 </div>
 <div class="article-meta">
