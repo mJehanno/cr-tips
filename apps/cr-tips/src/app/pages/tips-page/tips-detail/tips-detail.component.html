@@ -3,9 +3,13 @@
     <h1>{{tip.title}}</h1>
     <h2>{{tip.description}}</h2>
   </div>
-  <div>
-    <nz-tag [ngClass]="tip.game_mode">{{tip.game_mode}}</nz-tag>
-    <nz-tag [ngClass]="tip.category">{{tip.category}}</nz-tag>
+  <div class="tag-container">
+    <div>
+      <nz-tag *ngFor="let t of tip.game_mode" [ngClass]="t">{{t}}</nz-tag>
+    </div>
+    <div>
+      <nz-tag *ngFor="let t of tip.category" [ngClass]="t">{{t}}</nz-tag>
+    </div>
   </div>
 </div>
 <div class="article-meta">
