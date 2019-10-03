@@ -63,8 +63,8 @@ export class CreateTipsComponent implements OnInit, AfterViewInit {
         game_mode: this.validateForm.value.game_mode,
         category: this.validateForm.value.category
       };
-      //this.facade.addTips(tips);
-      //this.route.navigate(['/','tips']);
+      this.facade.addTips(tips);
+      this.route.navigate(['/','tips']);
     }
   }
 

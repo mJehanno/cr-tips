@@ -23,8 +23,8 @@
       <td>{{tip.description}}</td>
       <td>{{tip.score}}</td>
       <td>{{tip.date | date:'short'}}</td>
-      <td><nz-tag [ngClass]="tip.game_mode">{{_.capitalize(tip.game_mode)}}</nz-tag></td>
-      <td><nz-tag [ngClass]="tip.category" >{{_.capitalize(tip.category)}}</nz-tag></td>
+      <td><nz-tag *ngFor="let t of tip" [ngClass]="t.game_mode">{{_.capitalize(t.game_mode)}}</nz-tag></td>
+      <td><nz-tag *ngFor="let t of tip" [ngClass]="t.category" >{{_.capitalize(t.category)}}</nz-tag></td>
       <td class="action">
         <a [routerLink]="tip.idTips" (click)="selectTip(tip)"><i nz-icon [nzType]="'eye'"*ngIf="tip !== undefined"></i></a>
         <i nz-icon *ngIf="currentUser && currentUser.idUser === tip.authorUser.idUser" [nzType]="'edit'"></i>
