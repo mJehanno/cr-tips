@@ -34,9 +34,6 @@ export class HeroesDisplayerComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.heroesService.getAll().subscribe((data) => {
-      /*data.forEach(element => {
-        element.image = '/assets/Selection_119.png'
-      });*/
       this.heroes = <Hero[]>data.sort((a,b) => {
         if(a.name > b.name) {
           return 1;
