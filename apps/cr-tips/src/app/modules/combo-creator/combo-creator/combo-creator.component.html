@@ -1,9 +1,25 @@
 <div>
-<nz-card>Hero-list</nz-card>
+<nz-card  nzTitle="Heroes" class="hero-container" >
+  <cr-tips-hero-classifier (addingNewHero)="selectHero($event)" [tier]="'common'" [heroes]="common"></cr-tips-hero-classifier>
+  <cr-tips-hero-classifier (addingNewHero)="selectHero($event)" [tier]="'uncommon'" [heroes]="uncommon"></cr-tips-hero-classifier>
+  <cr-tips-hero-classifier (addingNewHero)="selectHero($event)" [tier]="'rare'" [heroes]="rare"></cr-tips-hero-classifier>
+  <cr-tips-hero-classifier (addingNewHero)="selectHero($event)" [tier]="'epic'" [heroes]="epic"></cr-tips-hero-classifier>
+  <cr-tips-hero-classifier (addingNewHero)="selectHero($event)" [tier]="'legendary'" [heroes]="legendary"></cr-tips-hero-classifier>
+</nz-card>
 <div class="informations">
-  <div>current combo</div>
-  <span>Total Unit Cost :</span>
-  <span>Number of Unit :</span>
+  <div>
+    current combo
+    <div>
+
+    </div>
+  </div>
+  <span>Total Unit Cost : {{totalCost}}</span>
+  <span>Number of Unit : {{selectedHeroes.size}}</span>
 </div>
-<nz-card>current heroes</nz-card>
+<nz-card>
+  <div class="selected">
+    <img *ngFor="let hero of selectedHeroes" (click)="unselectHero(hero)" width="32px" [src]="hero.avatar">
+  </div>
+
+</nz-card>
 </div>
