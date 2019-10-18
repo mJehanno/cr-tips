@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { HeroesService } from '../../../core/database/heroes.service';
 import { Hero } from '@cr-tips/data';
 import { NzMessageService } from 'ng-zorro-antd';
+import { Store, select } from '@ngrx/store';
+import { SimulatorState } from '../../../pages/simulator/+state/simulator.reducer';
+import { SimulatorQuery } from '../../../pages/simulator/+state/simulator.selector';
+import { AddHeroAction, RemoveHeroAction } from '../../../pages/simulator/+state/simulator.action';
 
 @Component({
   selector: 'cr-tips-combo-creator',
@@ -20,7 +24,7 @@ export class ComboCreatorComponent implements OnInit {
   totalCost = 0;
 
 
-  constructor(private heroesService: HeroesService, private message: NzMessageService) { }
+  constructor(private heroesService: HeroesService, private message: NzMessageService, private store: Store<SimulatorState>) { }
 
   ngOnInit() {
     this.heroesService.getAll().subscribe((heroes) => {
@@ -29,21 +33,25 @@ export class ComboCreatorComponent implements OnInit {
       this.rare = <Hero[]>heroes.filter(elem => elem.manaCost === 3);
       this.epic = <Hero[]>heroes.filter(elem => elem.manaCost === 4);
       this.legendary = <Hero[]>heroes.filter(elem => elem.manaCost === 5);
+    });
+    this.store.pipe(select(SimulatorQuery.getSimulatorSelectedHeroes)).subscribe((list) => {
+      this.selectedHeroes = list;
+    })
+    this.store.pipe(select(SimulatorQuery.getSimulatorCost)).subscribe((cost) => {
+      this.totalCost = cost;
     })
   }
 
   selectHero(value) {
     if(this.selectedHeroes.size < 10) {
-      this.selectedHeroes.add(value);
-      this.totalCost += value.manaCost;
+      this.store.dispatch(new AddHeroAction(value));
     } else {
       this.message.error(`You can't pick more than 10 heroes`);
     }
   }
 
   unselectHero(value) {
-    this.selectedHeroes.delete(value);
-    this.totalCost -= value.manaCost;
+    this.store.dispatch(new RemoveHeroAction(value));
   }
 
 }

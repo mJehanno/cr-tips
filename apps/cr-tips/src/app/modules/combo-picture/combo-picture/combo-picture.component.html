@@ -1,0 +1,16 @@
+<nz-badge [nzCount]="displayedCombo[_.lowerCase(category.name)]">
+  <img
+  *ngIf="displayedCombo[_.lowerCase(category.name)] >= 1"
+  nz-tooltip
+  [nzTooltipTitle]="titleTemplate"
+  [src]="category['icon']"
+  width="48px"
+  [ngClass]="{'active': isPictureActive}">
+  <ng-template #titleTemplate>
+      <div *ngFor="let effects of limit[_.lowerCase(category.name)];let i = index" [ngClass]="{'active': isEffectActive(effects)}">
+        {{effects.value}} - {{effects.effect}}
+        <nz-divider *ngIf="i !== (limit[_.lowerCase(category.name)].length -1)"></nz-divider>
+      </div>
+    </ng-template>
+</nz-badge>
+

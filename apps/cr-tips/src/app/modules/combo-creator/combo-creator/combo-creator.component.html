@@ -7,14 +7,15 @@
   <cr-tips-hero-classifier (addingNewHero)="selectHero($event)" [tier]="'legendary'" [heroes]="legendary"></cr-tips-hero-classifier>
 </nz-card>
 <div class="informations">
-  <div>
+  <div class="combo">
     current combo
-    <div>
-
-    </div>
+    <cr-tips-combo-notifier></cr-tips-combo-notifier>
   </div>
-  <span>Total Unit Cost : {{totalCost}}</span>
-  <span>Number of Unit : {{selectedHeroes.size}}</span>
+  <div class="stats">
+    <span>Total Unit Cost : {{totalCost}}</span>
+    <span>Number of Unit : {{selectedHeroes.size}}</span>
+  </div>
+
 </div>
 <nz-card>
   <div class="selected">

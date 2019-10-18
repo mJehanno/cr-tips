@@ -1,6 +1,6 @@
 <div>
     <h2>{{tier}}</h2>
     <div class="avatar-container">
-      <img *ngFor="let hero of heroes" (click)="addHero(hero)" [src]="hero.avatar" width="32px">
+      <img *ngFor="let hero of heroes" (click)="addHero(hero)" src="{{hero?.avatar}}" width="32px">
     </div>
 </div>
