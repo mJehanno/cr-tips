@@ -52,7 +52,6 @@ export class CreateTipsComponent implements OnInit, AfterViewInit {
 
   submitForm() {
     if(this.validateForm.valid){
-      console.log(this.validateForm.value);
       const tips = {
         content: this.validateForm.value.content,
         title: this.validateForm.value.title,
@@ -68,13 +67,5 @@ export class CreateTipsComponent implements OnInit, AfterViewInit {
     }
   }
 
-
-  /*updateValue(value){
-    console.log(value);
-    this.listOfSelectedValue = value;
-    this.validateForm.patchValue({
-      game_mode: this.listOfSelectedValue
-    });
-  }*/
 
 }

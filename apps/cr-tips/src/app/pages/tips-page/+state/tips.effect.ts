@@ -34,7 +34,7 @@ export class TipEffect{
       switchMap(() => {
         return this.tipService.getAll();
       }),
-      map((tips) => {console.log(tips); return new GotAllTipAction(tips)} )
+      map((tips) =>new GotAllTipAction(tips) )
   );
 
   @Effect() getTip$ = this.actions$.pipe(

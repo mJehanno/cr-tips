@@ -34,9 +34,7 @@ export class LoginDialogComponent implements OnInit {
       const user = { email : this.validateForm.value.email, password: this.validateForm.value.password};
       this.auhtFacade.login(user).then((auth) => {
         this.afAuth.user.subscribe((users) => {
-          console.log(users)
           this.userService.retrieveFromToken(users.uid).subscribe((data) => {
-            console.log(data);
             this.auhtFacade.userLogged(data[0]);
             this.closeModal();
           });

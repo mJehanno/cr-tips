@@ -32,7 +32,6 @@ export class TipsPageComponent implements OnInit {
     });
 
     this.tipStore.pipe(select(tipQuery.getDisplayedTips)).subscribe((data) => {
-      console.log(data);
       this.tips = data;
     });
 
