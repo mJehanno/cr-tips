@@ -5,7 +5,6 @@ export interface DisplayedTip {
     authorUser: User;
     date: Date;
     title: string;
-    description?: string;
     content: string;
     commentaries?: Commentary[];
     score: number;

@@ -9,7 +9,6 @@
   <thead>
     <th>Author</th>
     <th>Title</th>
-    <th>Description</th>
     <th>Score</th>
     <th>Date</th>
     <th>Game Mode</th>
@@ -20,7 +19,6 @@
     <tr *ngFor="let tip of tips">
       <td>{{tip.authorUser.nickname}}</td>
       <td>{{tip.title}}</td>
-      <td>{{tip.description}}</td>
       <td>{{tip.score}}</td>
       <td>{{tip.date | date:'short'}}</td>
       <td><nz-tag *ngFor="let t of tip.game_mode" [ngClass]="t">{{_.capitalize(t)}}</nz-tag></td>

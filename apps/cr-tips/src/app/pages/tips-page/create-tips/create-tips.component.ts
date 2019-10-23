@@ -43,7 +43,6 @@ export class CreateTipsComponent implements OnInit, AfterViewInit {
   createTipsForm() {
     return this.fb.group({
       title: ['', Validators.required],
-      description: ['', Validators.required],
       content: ['', Validators.required],
       category: [null, Validators.required],
       game_mode: [null, Validators.required]
@@ -55,7 +54,6 @@ export class CreateTipsComponent implements OnInit, AfterViewInit {
       const tips = {
         content: this.validateForm.value.content,
         title: this.validateForm.value.title,
-        description: this.validateForm.value.description,
         date: new Date(),
         score:0,
         author: this.currentUser.idUser,

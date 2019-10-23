@@ -6,7 +6,6 @@ export interface Tip {
   author: string;
   date: Date;
   title: string;
-  description?: string;
   content: string;
   commentaries?: Commentary[];
   score: number;

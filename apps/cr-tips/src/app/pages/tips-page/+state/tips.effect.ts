@@ -50,7 +50,7 @@ export class TipEffect{
       tip.date = new Date(tip.date['seconds'] * 1000);
       localStorage.removeItem('selectedTip');
       return {idTips: tip.idTips, authorUser: user[0], date: tip.date, title: tip.title,
-        description: tip.description, content: tip.content, commentaries: tip.commentaries, score: tip.score,
+        content: tip.content, commentaries: tip.commentaries, score: tip.score,
         game_mode: tip.game_mode, category: tip.category }
     }),
     map((tip) => new GotDetailTipAction(tip))
