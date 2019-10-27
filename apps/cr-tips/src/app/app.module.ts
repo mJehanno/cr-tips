@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,9 +26,12 @@ import { tipReducer } from './pages/tips-page/+state/tips.reducer';
 import { TipEffect } from './pages/tips-page/+state/tips.effect';
 import { simulatorReducer } from './pages/simulator/+state/simulator.reducer';
 import { SimulatorEffect } from './pages/simulator/+state/simulator.effect';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { appSettingsReducer } from './core/+state/app-settings.reducer';
+import { AppSettingsFacade } from './core/+state/app-settings.facade';
 
 registerLocaleData(en);
-
+export function getSettings(facade:AppSettingsFacade) { return () => facade.getAppVersion();}
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,7 +45,9 @@ registerLocaleData(en);
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     StoreModule.forRoot({}, {}),
+    StoreModule.forFeature('settings', appSettingsReducer),
     StoreModule.forFeature('auth', authenticationReducer),
     StoreModule.forFeature('tip', tipReducer),
     StoreModule.forFeature('simulator', simulatorReducer),
@@ -50,7 +55,10 @@ registerLocaleData(en);
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([AuthenticationEffects, TipEffect, SimulatorEffect]),
     AuthModule],
-  providers: [{ provide: NZ_I18N, useValue: en_GB }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_GB, multi: true },
+    {provide: APP_INITIALIZER, useFactory: getSettings, deps:[AppSettingsFacade], multi: true}
+  ],
   entryComponents: [RegisterDialogComponent, LoginDialogComponent],
   bootstrap: [AppComponent]
 })

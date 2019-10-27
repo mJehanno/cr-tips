@@ -18,7 +18,7 @@
             <a routerLink="/tips" routerLinkActive="router-link-active" >Tips</a>
             <!--<a routerLink="/welcome">Tips</a>-->
           </li>
-          <li nz-menu-item nzMatchRouter>
+          <li nz-menu-item nzMatchRouter *ngIf="(version | async)  > '1.0.0'">
             <a>Best Composition</a>
           </li>
           <li nz-menu-item nzMatchRouter>
@@ -29,7 +29,7 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Profile" nzIcon="user" *ngIf="userLogged">
+      <li nz-submenu nzOpen nzTitle="Profile" nzIcon="user" *ngIf="userLogged && (version | async) > '1.0.0'">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a>Profile Informations</a>
@@ -41,7 +41,7 @@
       </li>
       <li  nz-submenu nzOpen nzTitle="About" nzIcon="info-circle">
         <ul>
-          <li nz-menu-item nzMatchRouter>Roadmap</li>
+          <li nz-menu-item nzMatchRouter *ngIf="(version | async) > '1.0.0'">Roadmap</li>
           <li nz-menu-item nzMatchRouter>Bug</li>
           <li nz-menu-item nzMatchRouter>Legal Mentions</li>
         </ul>

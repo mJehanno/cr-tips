@@ -7,6 +7,8 @@ import { LoginDialogComponent } from './modules/auth/login-dialog/login-dialog.c
 import { authenticationQuery } from './modules/auth/+state/authentication.selectors';
 import { AuthenticationFacade } from './modules/auth/+state/authentication.facade';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AppSettingState } from './core/+state/app-settings.reducer';
+import { AppSettingQuery } from './core/+state/app-settings.selector';
 
 @Component({
   selector: 'cr-tips-root',
@@ -16,14 +18,14 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AppComponent implements OnInit {
   isCollapsed = false;
   userLogged = false;
-
-
-  constructor(private dialog: NzModalService, public afAuth: AngularFireAuth,private authFacade: AuthenticationFacade) {}
+  version;
+  constructor(private dialog: NzModalService, public afAuth: AngularFireAuth,private authFacade: AuthenticationFacade, private store: Store<AppSettingState>) {}
 
   ngOnInit() {
     this.afAuth.authState.subscribe((state) => { // Should probably move that to selector and get that here from state.
       this.userLogged = state ? true : false;
-    })
+    });
+    this.version = this.store.pipe(select(AppSettingQuery.getVersion));
   }
 
 
