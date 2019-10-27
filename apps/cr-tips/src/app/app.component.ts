@@ -6,6 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { LoginDialogComponent } from './modules/auth/login-dialog/login-dialog.component';
 import { authenticationQuery } from './modules/auth/+state/authentication.selectors';
 import { AuthenticationFacade } from './modules/auth/+state/authentication.facade';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'cr-tips-root',
@@ -17,16 +18,12 @@ export class AppComponent implements OnInit {
   userLogged = false;
 
 
-  constructor(private dialog: NzModalService, private store: Store<AuthenticationState>,private authFacade: AuthenticationFacade) {}
+  constructor(private dialog: NzModalService, public afAuth: AngularFireAuth,private authFacade: AuthenticationFacade) {}
 
   ngOnInit() {
-    this.store.pipe(select(authenticationQuery.getUser)).subscribe((user) => {
-      if (user !== null && user !== undefined) {
-        this.userLogged = true;
-      } else {
-        this.userLogged = false;
-      }
-    });
+    this.afAuth.authState.subscribe((state) => { // Should probably move that to selector and get that here from state.
+      this.userLogged = state ? true : false;
+    })
   }
 
 

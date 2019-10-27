@@ -22,7 +22,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { RegisterDialogComponent } from './modules/auth/register-dialog/register-dialog.component';
 import { LoginDialogComponent } from './modules/auth/login-dialog/login-dialog.component';
-import { localStorageSync } from 'ngrx-store-localstorage';
 import { tipReducer } from './pages/tips-page/+state/tips.reducer';
 import { TipEffect } from './pages/tips-page/+state/tips.effect';
 import { simulatorReducer } from './pages/simulator/+state/simulator.reducer';
@@ -30,11 +29,7 @@ import { SimulatorEffect } from './pages/simulator/+state/simulator.effect';
 
 registerLocaleData(en);
 
-export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
-  return localStorageSync({keys: ['auth'], rehydrate: true})(reducer);
-}
 
-const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule,
@@ -47,7 +42,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    StoreModule.forRoot({}, {metaReducers}),
+    StoreModule.forRoot({}, {}),
     StoreModule.forFeature('auth', authenticationReducer),
     StoreModule.forFeature('tip', tipReducer),
     StoreModule.forFeature('simulator', simulatorReducer),

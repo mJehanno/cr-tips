@@ -9,7 +9,7 @@ import { UserService } from '../../../core/database/user.service';
 @Component({
   selector: 'cr-tips-login-dialog',
   templateUrl: './login-dialog.component.html',
-  styleUrls: ['./login-dialog.component.css']
+  styleUrls: ['./login-dialog.component.less']
 })
 export class LoginDialogComponent implements OnInit {
 
@@ -42,6 +42,17 @@ export class LoginDialogComponent implements OnInit {
 
       }).catch((err) => { this.message.error('Wrong login/password');});
     }
+  }
+
+  resetPassword(){
+    if(!this.validateForm.get('email').value){
+      this.message.error('You have to provide an email');
+    }else {
+      this.auhtFacade.resetPassword(this.validateForm.get('email').value).then(() => {
+        this.message.info('Check your email to reset your password !');
+      });
+    }
+
   }
 
 

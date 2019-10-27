@@ -35,7 +35,10 @@ export class AuthenticationFacade {
   }
 
   public logout() {
-    this.store.dispatch(new Logout());
+    this.af.auth.signOut().then(() => {
+      this.store.dispatch(new Logout());
+      window.location.reload();
+    });
   }
 
   public registerSubmitted() {
@@ -44,6 +47,10 @@ export class AuthenticationFacade {
 
   public loginSubmitted() {
     this.store.dispatch(new LoginFormSubmit());
+  }
+
+  resetPassword(email: string) {
+    return this.af.auth.sendPasswordResetEmail(email);
   }
 
 }

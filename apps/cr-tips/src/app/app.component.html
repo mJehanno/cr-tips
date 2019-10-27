@@ -58,9 +58,9 @@
             ></i>
         </span>
         <div class="button-header">
-          <button nz-button (click)="showLoginModal()" *ngIf="!userLogged">Login</button>
-          <button nz-button (click)="showRegisterModal()" *ngIf="!userLogged">Register</button>
-          <button nz-button (click)="logout()" *ngIf="userLogged">Log Out</button>
+          <button nz-button (click)="showLoginModal()" *ngIf="!afAuth.user | async">Login</button>
+          <button nz-button (click)="showRegisterModal()" *ngIf="!afAuth.user | async">Register</button>
+          <button nz-button (click)="logout()" *ngIf="afAuth.user | async">Log Out</button>
         </div>
       </div>
     </nz-header>

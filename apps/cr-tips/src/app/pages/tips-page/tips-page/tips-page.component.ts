@@ -11,6 +11,7 @@ import { map, flatMap, switchMap, mergeAll, mergeMap } from 'rxjs/operators';
 import { forkJoin, Observable, merge, concat } from 'rxjs';
 import { TipsService } from '../../../core/database/tips.service';
 import * as _ from 'lodash';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'cr-tips-tips-page',
@@ -21,16 +22,13 @@ export class TipsPageComponent implements OnInit {
   _ = _;
   currentUser: User = null;
   tips: DisplayedTip[] = [];
+  isLogged = false;
 
-  constructor(private store: Store<AuthenticationState>, private tipStore: Store<TipState>,
-    private tipFace: TipsFacade, private userService: UserService, private tipService: TipsService) { }
+  constructor( private tipStore: Store<TipState>,
+    private tipFace: TipsFacade, private tipService: TipsService, public afAuth: AngularFireAuth, private userService: UserService) { }
 
   ngOnInit() {
     this.tipFace.getAllTips();
-    this.store.pipe(select(authenticationQuery.getUser)).subscribe((data) => {
-      this.currentUser = data;
-    });
-
     this.tipStore.pipe(select(tipQuery.getDisplayedTips)).subscribe((data) => {
       this.tips = data;
     });

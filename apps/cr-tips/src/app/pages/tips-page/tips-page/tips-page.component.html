@@ -1,7 +1,7 @@
 
 <div class="tips-header">
   <h1>Tips List</h1>
-  <button *ngIf="currentUser !== null" nz-button nzSize="large" nzType="primary" routerLink="/tips/create"><i nz-icon nzType="plus"></i>Add Tip</button>
+  <button *ngIf="afAuth.user | async" nz-button nzSize="large" nzType="primary" routerLink="/tips/create"><i nz-icon nzType="plus"></i>Add Tip</button>
 </div>
 
 <i>Tips are advises that works in general, they are not totally related to composition of the team, it can be about positionning, manage your economy, etc .. </i>
