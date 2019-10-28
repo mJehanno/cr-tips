@@ -51,13 +51,15 @@ export function getSettings(facade:AppSettingsFacade) { return () => facade.getA
     StoreModule.forFeature('auth', authenticationReducer),
     StoreModule.forFeature('tip', tipReducer),
     StoreModule.forFeature('simulator', simulatorReducer),
-    StoreDevtoolsModule.instrument(),
+    StoreDevtoolsModule.instrument({
+      logOnly: environment.production
+    }),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([AuthenticationEffects, TipEffect, SimulatorEffect]),
     AuthModule],
   providers: [
     { provide: NZ_I18N, useValue: en_GB, multi: true },
-    {provide: APP_INITIALIZER, useFactory: getSettings, deps:[AppSettingsFacade], multi: true}
+    /*{provide: APP_INITIALIZER, useFactory: getSettings, deps:[AppSettingsFacade], multi: true}*/
   ],
   entryComponents: [RegisterDialogComponent, LoginDialogComponent],
   bootstrap: [AppComponent]

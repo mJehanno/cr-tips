@@ -18,7 +18,7 @@
             <a routerLink="/tips" routerLinkActive="router-link-active" >Tips</a>
             <!--<a routerLink="/welcome">Tips</a>-->
           </li>
-          <li nz-menu-item nzMatchRouter *ngIf="(version | async)  > '1.0.0'">
+          <li nz-menu-item nzMatchRouter *ngIf="version > '1.0.0'">
             <a>Best Composition</a>
           </li>
           <li nz-menu-item nzMatchRouter>
@@ -29,7 +29,7 @@
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Profile" nzIcon="user" *ngIf="userLogged && (version | async) > '1.0.0'">
+      <li nz-submenu nzOpen nzTitle="Profile" nzIcon="user" *ngIf="version > '1.0.0' && (afAuth.user) | async">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a>Profile Informations</a>
@@ -41,7 +41,7 @@
       </li>
       <li  nz-submenu nzOpen nzTitle="About" nzIcon="info-circle">
         <ul>
-          <li nz-menu-item nzMatchRouter *ngIf="(version | async) > '1.0.0'">Roadmap</li>
+          <li nz-menu-item nzMatchRouter *ngIf="version > '1.0.0'">Roadmap</li>
           <li nz-menu-item nzMatchRouter>Bug</li>
           <li nz-menu-item nzMatchRouter>Legal Mentions</li>
         </ul>
@@ -58,8 +58,8 @@
             ></i>
         </span>
         <div class="button-header">
-          <button nz-button (click)="showLoginModal()" *ngIf="!afAuth.user | async">Login</button>
-          <button nz-button (click)="showRegisterModal()" *ngIf="!afAuth.user | async">Register</button>
+          <button nz-button (click)="showLoginModal()" *ngIf="!(afAuth.user | async)">Login</button>
+          <button nz-button (click)="showRegisterModal()" *ngIf="!(afAuth.user | async)">Register</button>
           <button nz-button (click)="logout()" *ngIf="afAuth.user | async">Log Out</button>
         </div>
       </div>

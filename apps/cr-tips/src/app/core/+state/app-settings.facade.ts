@@ -13,7 +13,6 @@ export class AppSettingsFacade{
 
   getAppVersion(){
     this.appSettingsService.getSettings().subscribe((settings) => {
-      console.log(settings);
       this.store.dispatch(new SetAppVersion(settings['version']))
     })
   }

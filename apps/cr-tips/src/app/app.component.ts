@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd';
 import { RegisterDialogComponent } from './modules/auth/register-dialog/register-dialog.component';
 import { AuthenticationState } from './modules/auth/+state/authentication.reducer';
@@ -17,15 +17,18 @@ import { AppSettingQuery } from './core/+state/app-settings.selector';
 })
 export class AppComponent implements OnInit {
   isCollapsed = false;
-  userLogged = false;
   version;
-  constructor(private dialog: NzModalService, public afAuth: AngularFireAuth,private authFacade: AuthenticationFacade, private store: Store<AppSettingState>) {}
+  constructor(
+    private dialog: NzModalService,
+    public afAuth: AngularFireAuth,
+    private authFacade: AuthenticationFacade,
+    @Inject('config') private config
+    ) {}
 
   ngOnInit() {
     this.afAuth.authState.subscribe((state) => { // Should probably move that to selector and get that here from state.
-      this.userLogged = state ? true : false;
     });
-    this.version = this.store.pipe(select(AppSettingQuery.getVersion));
+    this.version = this.config.version;
   }
 
 

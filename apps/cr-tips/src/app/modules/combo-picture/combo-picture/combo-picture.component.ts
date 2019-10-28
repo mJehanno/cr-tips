@@ -102,7 +102,6 @@ export class ComboPictureComponent implements OnInit{
         }
       }
       if(combo.punisher >= 2) {
-        console.log(combo.demonPunisher);
         this.displayedCombo['punisher'] = 2 +  combo.demonPunisher;
       }
     });

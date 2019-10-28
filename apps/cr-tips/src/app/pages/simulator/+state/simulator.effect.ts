@@ -52,9 +52,7 @@ export class SimulatorEffect {
               const newCombo = sumObjectsByKey(combo, stateCombo)
               if(newCombo.punisher >= 2) {
                 if(newCombo.demon >= 1) {
-                  console.log(newCombo.demon);
                   combo['demonPunisher'] = newCombo.demon -1;
-                  console.log(newCombo.demon -1)
                 }
               }
             }
@@ -101,9 +99,7 @@ export class SimulatorEffect {
             const newCombo = sumObjectsByKey(combo, stateCombo)
             if(newCombo.punisher >= 2) {
               if(newCombo.demon >= 1) {
-                console.log(newCombo.demon);
                 combo['demonPunisher'] = newCombo.demon -1;
-                console.log(newCombo.demon -1)
               }
             }
             return of(combo);
