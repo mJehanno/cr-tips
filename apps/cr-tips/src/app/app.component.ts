@@ -1,14 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd';
 import { RegisterDialogComponent } from './modules/auth/register-dialog/register-dialog.component';
-import { AuthenticationState } from './modules/auth/+state/authentication.reducer';
-import { Store, select } from '@ngrx/store';
 import { LoginDialogComponent } from './modules/auth/login-dialog/login-dialog.component';
-import { authenticationQuery } from './modules/auth/+state/authentication.selectors';
 import { AuthenticationFacade } from './modules/auth/+state/authentication.facade';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AppSettingState } from './core/+state/app-settings.reducer';
-import { AppSettingQuery } from './core/+state/app-settings.selector';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
+declare const gtag: Function;
 
 @Component({
   selector: 'cr-tips-root',
@@ -22,8 +20,23 @@ export class AppComponent implements OnInit {
     private dialog: NzModalService,
     public afAuth: AngularFireAuth,
     private authFacade: AuthenticationFacade,
+    private router: Router,
     @Inject('config') private config
-    ) {}
+    ) {
+            // Google Analytics
+            router.events
+            .pipe(
+              distinctUntilChanged((previous: any, current: any) => {
+                if (current instanceof NavigationEnd) {
+                  return previous.url === current.url;
+                }
+                return true;
+              })
+            ).subscribe((event: any) => {
+            gtag('set', 'page', event.url);
+            gtag('send', 'pageview');
+          });
+    }
 
   ngOnInit() {
     this.afAuth.authState.subscribe((state) => { // Should probably move that to selector and get that here from state.

@@ -33,6 +33,9 @@ import { AppSettingsFacade } from './core/+state/app-settings.facade';
 registerLocaleData(en);
 export function getSettings(facade:AppSettingsFacade) { return () => facade.getAppVersion();}
 
+
+registerLocaleData(en);
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule,
@@ -51,9 +54,9 @@ export function getSettings(facade:AppSettingsFacade) { return () => facade.getA
     StoreModule.forFeature('auth', authenticationReducer),
     StoreModule.forFeature('tip', tipReducer),
     StoreModule.forFeature('simulator', simulatorReducer),
-    StoreDevtoolsModule.instrument({
+    !environment.production ? StoreDevtoolsModule.instrument({
       logOnly: environment.production
-    }),
+    }): [],
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([AuthenticationEffects, TipEffect, SimulatorEffect]),
     AuthModule],
