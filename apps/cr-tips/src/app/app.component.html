@@ -42,11 +42,14 @@
       <li  nz-submenu nzOpen nzTitle="About" nzIcon="info-circle">
         <ul>
           <li nz-menu-item nzMatchRouter *ngIf="version > '1.0.0'">Roadmap</li>
-          <li nz-menu-item nzMatchRouter>Bug</li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/bug" routerLinkActive="router-link-active" >Contact</a>
+          </li>
           <li nz-menu-item nzMatchRouter>Legal Mentions</li>
         </ul>
       </li>
     </ul>
+    <div class="slider-footer">Version : {{version}}</div>
   </nz-sider>
   <nz-layout>
     <nz-header>

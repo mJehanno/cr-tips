@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'tips', loadChildren: () => import('./pages/tips-page/tips-page.module').then(m => m.TipsPageModule)},
   { path: 'heroes', loadChildren: () => import('./pages/heroes-page/heroes-page.module').then(m => m.HeroesPageModule)},
   { path: 'simulator', loadChildren: () => import('./pages/simulator/simulator.module').then(m => m.SimulatorModule)},
+  { path: 'bug', loadChildren: () => import('./pages/bug-form/bug-form.module').then(m => m.BugFormModule)},
 ];
 
 @NgModule({

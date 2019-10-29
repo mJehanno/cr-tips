@@ -1,0 +1,17 @@
+<h2>Contact Me</h2>
+<p>
+  You want to report a bug, ask for a new feature or translate this site to a new language ?
+  <br>
+  Then just fill the form below with as much information as possible.
+</p>
+<form #form action="https://formspree.io/mqkzywpp" method="POST">
+ <input type="hidden" [value]="category" name="_subject">
+  <nz-select nzAllowClear nzPlaceHolder="Category" required name="category" [(ngModel)]="category">
+    <nz-option nzLabel="Bug" nzValue="Fix a Bug"></nz-option>
+    <nz-option nzLabel="Feature" nzValue="Add New Feature"></nz-option>
+    <nz-option nzLabel="Language" nzValue="Request new Language"></nz-option>
+    <nz-option nzLabel="Feedback" nzValue="Send Feedback"></nz-option>
+  </nz-select>
+  <textarea rows="4" nz-input placeholder="Some text here" name="text"></textarea>
+  <button nz-button type="submit" nzType="primary" (click)="form.submit()">Submit</button>
+</form>
