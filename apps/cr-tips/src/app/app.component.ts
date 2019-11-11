@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
               })
             ).subscribe((event: any) => {
             gtag('set', 'page', event.url);
-            gtag('send', 'pageview');
+            gtag('config', 'GTM-KGPD52M');
           });
     }
 
