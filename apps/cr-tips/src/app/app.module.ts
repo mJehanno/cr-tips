@@ -47,7 +47,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     AngularFireDatabaseModule,
     StoreModule.forRoot({}, {}),
     StoreModule.forFeature('settings', appSettingsReducer),

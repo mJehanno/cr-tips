@@ -33,7 +33,7 @@ export class HeroesDisplayerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.heroesService.getAll().subscribe((data) => {
+    this.heroesService.getAll().subscribe((data: Hero[]) => {
       this.heroes = <Hero[]>data.sort((a,b) => {
         if(a.name > b.name) {
           return 1;
