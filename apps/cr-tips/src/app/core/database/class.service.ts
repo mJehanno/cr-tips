@@ -9,7 +9,7 @@ export class ClassService {
 
   classesCollection : AngularFirestoreCollection<Class>;
   constructor(private af: AngularFirestore) {
-    this.classesCollection = this.af.collection<Class>('classes');
+    this.classesCollection = this.af.collection<Class>('classes', ref => ref.where('isActive', '==', true));
   }
 
   getAllClasses() {

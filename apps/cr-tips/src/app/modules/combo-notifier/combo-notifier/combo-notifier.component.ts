@@ -28,6 +28,7 @@ export class ComboNotifierComponent implements OnInit {
       this.activatedCombo = {...this.activatedCombo, 'races': [...data]};
     });
     this.classService.getAllClasses().subscribe((data)=>{
+      console.log(data);
       this.classes = data;
       this.activatedCombo = {...this.activatedCombo,'classes': [...data]};
     });

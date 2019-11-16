@@ -35,7 +35,8 @@ export const initialSimulatorState: SimulatorState = {
         punisher: 0,
         warrior: 0,
         druid: 0,
-        demonPunisher: 0
+        demonPunisher: 0,
+        tank:0
     }
 }
 

@@ -27,7 +27,8 @@ export class ComboCreatorComponent implements OnInit {
   constructor(private heroesService: HeroesService, private message: NzMessageService, private store: Store<SimulatorState>) { }
 
   ngOnInit() {
-    this.heroesService.getAll().subscribe((heroes) => {
+
+    this.heroesService.getAll().subscribe((heroes: Hero[]) => {
       this.common = <Hero[]>heroes.filter(elem => elem.manaCost === 1);
       this.uncommon = <Hero[]>heroes.filter(elem => elem.manaCost === 2);
       this.rare = <Hero[]>heroes.filter(elem => elem.manaCost === 3);
