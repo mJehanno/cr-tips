@@ -44,7 +44,6 @@ export class SimulatorEffect {
             };
             if(!condition){
               action.hero.classes.map((elem) => {
-                console.log(elem);
                 combo[_.lowerCase(elem)] = 1;
               });
               action.hero.race.map((elem) => {
