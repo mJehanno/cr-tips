@@ -37,7 +37,8 @@ export class ComboPictureComponent implements OnInit{
         punisher: 0,
         warrior: 0,
         druid: 0,
-        demonPunisher: 0
+        demonPunisher: 0,
+        tank: 0
   }
   _ = _;
   limit = {
@@ -103,7 +104,6 @@ export class ComboPictureComponent implements OnInit{
   ngOnInit() {
     this.store.pipe(select(SimulatorQuery.getSimulatorCombo)).subscribe((combo) => {
       this.displayedCombo = {...combo};
-
       if(this.limit[_.lowerCase(this.category.name)][0].value <= this.displayedCombo[_.lowerCase(this.category.name)]){
         this.isPictureActive = true
         if(_.lowerCase(this.category.name) === 'demon') {
