@@ -40,7 +40,8 @@ export class SimulatorEffect {
               warrior: 0,
               druid: 0,
               demonPunisher: 0,
-              tank: 0
+              protector: 0,
+              eastern: 0,
             };
             if(!condition){
               action.hero.classes.map((elem) => {

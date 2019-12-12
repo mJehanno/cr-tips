@@ -41,9 +41,9 @@ export class ComboPictureComponent implements OnInit{
   }
   _ = _;
   limit = {
-    elf: [{value: 2, effect: 'Has a 10% chance to leash (stun) the target for 1 second when attacking or attacked.'},
-      {value: 4, effect: 'Has a 15% chance to leash (stun) the target for 1.5 seconds when attacking or attacked.'},
-      {value: 6, effect: 'Has a 20% chance to leash (stun) the target for 2 seconds when attacking or attacked.'}],
+    elf: [{value: 2, effect: 'Ally elves have a 15% chance to stun the target for 1.5 seconds when attacking, and a 7.5% chance to leash the target for 1.5 seconds when attacked.'},
+      {value: 4, effect: 'Ally elves have a 20% chance to stun the target for 1.5 seconds when attacking, and a 10% chance to leash the target for 1.5 seconds when attacked.'},
+      {value: 6, effect: 'Ally elves have a 30% chance to stun the target for 1.5 seconds when attacking, and a 15% chance to leash the target for 1.5 seconds when attacked.'}],
     human: [{value: 2, effect: 'Restore 3 mana every second for all allies'},
       {value: 4, effect: 'Restore 5 mana every second for all allies. Ally Humans have a 25% chance to reset the ability cooldown and restore 100 mana after casting an ability'},
       {value: 6, effect: 'Restore 7 mana every second for all allies. Ally Humans have a 50% chance to reset the ability cooldown and restore 100 mana after casting an ability'}],
@@ -86,10 +86,14 @@ export class ComboPictureComponent implements OnInit{
       {value: 4, effect: 'Ally Punishers normal attacks deal 35% physical damage to ennemies within 1 square of the target'}],
     druid: [{value: 2,  effect: '2 identical 1-star druids can be combined to a 2-star one instead of 3. Restore 10 mana for all allies within 1 grid upon death'},
       {value: 4,  effect: '2 identical 2-star druids can be combined to a 3-star one instead of 3. Restore 20 mana for all allies within 1 grid upon death'}],
-    warrior: [{value: 3, effect: 'Increases armor for all ally warriors by 50'},{value :6, effect: 'Increases armor for all ally warriors by 100'}],
-    tank: [
-      {value: 2, effect: '15% damage reduction to both the tank and the protected hero, and absorbing 20% of their damage taken.'},
-      {value: 3, effect: '25% damage reduction to both the tank and the protected hero, and absorbing 30% of their damage taken.'}
+    warrior: [{value: 3, effect: 'Increases armor for all ally warriors by 300%'},{value :6, effect: 'Increases armor for all ally warriors by 500%'}],
+    protector: [
+      {value: 2, effect: '15% damage reduction to both the protector and the protected hero, and absorbing 20% of their damage taken.'},
+      {value: 4, effect: 'All ally protectors and the heroes one square behind them receive a 20% damage reduction at the beginning of a battle. Protectors absorb 20% of the damage dealt to the heroes behind them.'}
+    ],
+    eastern: [
+      {value: 2, effect: 'All ally easterns receive "Iron Body", when their HP drops below 40%. "Iron Body" lasts 2s decreasing damage taken by 80%.'},
+      {value: 4, effect: 'All ally easterns receive "Iron Body", when their HP drops below 40%. "Iron Body" lasts 3s decreasing damage taken by 100%.'}
     ]
   }
   displayedCombo = {};

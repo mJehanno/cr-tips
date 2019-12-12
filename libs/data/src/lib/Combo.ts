@@ -8,6 +8,7 @@ export interface Combo{
     demon?: number;
     goblin?: number;
     furry?: number;
+    eastern?: number;
     cyborg?: number;
     void?: number;
     dragon?: number;
@@ -20,6 +21,6 @@ export interface Combo{
     punisher?: number;
     warrior?: number;
     druid?: number;
-    tank?:number;
+    protector?:number;
     demonPunisher?: number;
 }
