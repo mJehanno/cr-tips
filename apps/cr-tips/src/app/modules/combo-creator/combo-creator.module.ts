@@ -4,6 +4,7 @@ import { ComboCreatorComponent } from './combo-creator/combo-creator.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { HeroClassifierModule } from '../hero-classifier/hero-classifier.module';
 import { ComboNotifierModule } from '../combo-notifier/combo-notifier.module';
+import { NzIconModule, NzButtonModule } from 'ng-zorro-antd';
 
 @NgModule({
   declarations: [ComboCreatorComponent],
@@ -11,7 +12,9 @@ import { ComboNotifierModule } from '../combo-notifier/combo-notifier.module';
     CommonModule,
     NzCardModule,
     HeroClassifierModule,
-    ComboNotifierModule
+    ComboNotifierModule,
+    NzIconModule,
+    NzButtonModule
   ],
   exports: [ComboCreatorComponent]
 })

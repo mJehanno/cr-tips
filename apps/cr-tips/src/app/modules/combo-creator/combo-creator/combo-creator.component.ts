@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { SimulatorState } from '../../../pages/simulator/+state/simulator.reducer';
 import { SimulatorQuery } from '../../../pages/simulator/+state/simulator.selector';
 import { AddHeroAction, RemoveHeroAction } from '../../../pages/simulator/+state/simulator.action';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'cr-tips-combo-creator',
@@ -23,9 +23,9 @@ export class ComboCreatorComponent implements OnInit {
   legendary: Hero[] = [];
   selectedHeroes = new Set();
   totalCost = 0;
+  urlCombo = '';
 
-
-  constructor(private heroesService: HeroesService, private message: NzMessageService, private store: Store<SimulatorState>, private route: ActivatedRoute) { }
+  constructor(private heroesService: HeroesService, private message: NzMessageService, private store: Store<SimulatorState>, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.heroesService.getAll().subscribe((heroes: Hero[]) => {
@@ -37,7 +37,8 @@ export class ComboCreatorComponent implements OnInit {
       this.legendary = <Hero[]>heroes.filter(elem => elem.manaCost === 5);
 
       this.route.queryParams.subscribe(params => {
-        const combo = params.combo.split(',')
+        this.urlCombo = params.combo;
+        const combo = params.combo.split(',');
         const urlHeroes = this.heroes.filter((hero) => {
           return combo.includes(hero.name);
         });
@@ -54,16 +55,46 @@ export class ComboCreatorComponent implements OnInit {
     })
   }
 
-  selectHero(value) {
-    if(this.selectedHeroes.size < 10) {
+  selectHero(value:Hero) {
+    if(this.selectedHeroes.size < 10 ) {
       this.store.dispatch(new AddHeroAction(value));
+      if(!this.urlCombo.includes(value.name)){
+        let query = this.urlCombo;
+        console.log([...this.urlCombo.split(','), value.name]);
+        if(this.urlCombo.length > 0){
+          if(this.urlCombo.split(',').length <= 10){
+            query =  [...this.urlCombo.split(','), value.name].join(',');
+          }
+        }else{
+          query = value.name
+        }
+
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: {
+            combo: query
+          },
+          skipLocationChange: false,
+          queryParamsHandling: 'merge'
+        });
+      }
     } else {
       this.message.error(`You can't pick more than 10 heroes`);
     }
   }
 
-  unselectHero(value) {
+  unselectHero(value:Hero) {
     this.store.dispatch(new RemoveHeroAction(value));
+    const query = this.urlCombo.split(',').filter(elem =>
+      elem !== value.name).join(',');
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        combo: query
+      },
+      skipLocationChange: false,
+      queryParamsHandling: 'merge'
+    });
   }
 
 }
