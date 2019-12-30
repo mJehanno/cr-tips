@@ -88,9 +88,9 @@ export class ComboPictureComponent implements OnInit{
     druid: [{value: 2,  effect: '2 identical 1-star druids can be combined to a 2-star one instead of 3. Restore 10 mana for all allies within 1 grid upon death'},
       {value: 4,  effect: '2 identical 2-star druids can be combined to a 3-star one instead of 3. Restore 20 mana for all allies within 1 grid upon death'}],
     warrior: [{value: 3, effect: 'Increases armor for all ally warriors by 300%'},{value :6, effect: 'Increases armor for all ally warriors by 500%'}],
-    protector: [
-      {value: 2, effect: '15% damage reduction to both the protector and the protected hero, and absorbing 20% of their damage taken.'},
-      {value: 4, effect: 'All ally protectors and the heroes one square behind them receive a 20% damage reduction at the beginning of a battle. Protectors absorb 20% of the damage dealt to the heroes behind them.'}
+    tank: [
+      {value: 2, effect: '15% damage reduction to both the tank and the protected hero, and absorbing 20% of their damage taken.'},
+      {value: 4, effect: 'All ally tank and the heroes one square behind them receive a 20% damage reduction at the beginning of a battle. Tanks absorb 20% of the damage dealt to the heroes behind them.'}
     ],
     eastern: [
       {value: 2, effect: 'All ally easterns receive "Iron Body", when their HP drops below 40%. "Iron Body" lasts 2s decreasing damage taken by 80%.'},

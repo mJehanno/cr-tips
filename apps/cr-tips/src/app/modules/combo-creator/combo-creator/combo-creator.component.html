@@ -21,8 +21,8 @@
   <div class="selected">
     <img *ngFor="let hero of selectedHeroes" (click)="unselectHero(hero)" width="32px" [src]="hero.avatar">
     <div class="button-container">
-      <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="link"></i></button>
-      <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="camera"></i></button>
+      <button nz-button nzType="primary" (click)="saveComboToLink()" nzShape="circle"><i nz-icon nzType="link"></i></button>
+      <!--<button nz-button nzType="primary" (click)="saveComboToPicture()" nzShape="circle"><i nz-icon nzType="camera"></i></button>-->
     </div>
   </div>
 

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HeroesService } from '../../../core/database/heroes.service';
 import { Hero } from '@cr-tips/data';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzNotificationService } from 'ng-zorro-antd';
 import { Store, select } from '@ngrx/store';
 import { SimulatorState } from '../../../pages/simulator/+state/simulator.reducer';
 import { SimulatorQuery } from '../../../pages/simulator/+state/simulator.selector';
 import { AddHeroAction, RemoveHeroAction } from '../../../pages/simulator/+state/simulator.action';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { BitlyService } from '../../../core/api/bitly.service';
+import { ClipboardService } from 'ngx-clipboard';
 @Component({
   selector: 'cr-tips-combo-creator',
   templateUrl: './combo-creator.component.html',
@@ -25,7 +26,16 @@ export class ComboCreatorComponent implements OnInit {
   totalCost = 0;
   urlCombo = '';
 
-  constructor(private heroesService: HeroesService, private message: NzMessageService, private store: Store<SimulatorState>, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private heroesService: HeroesService,
+    private message: NzMessageService,
+    private store: Store<SimulatorState>,
+    private route: ActivatedRoute,
+    private router: Router,
+    private bitlyService: BitlyService,
+    private clipboardService: ClipboardService,
+    private notification: NzNotificationService
+    ) { }
 
   ngOnInit() {
     this.heroesService.getAll().subscribe((heroes: Hero[]) => {
@@ -37,14 +47,16 @@ export class ComboCreatorComponent implements OnInit {
       this.legendary = <Hero[]>heroes.filter(elem => elem.manaCost === 5);
 
       this.route.queryParams.subscribe(params => {
-        this.urlCombo = params.combo;
-        const combo = params.combo.split(',');
-        const urlHeroes = this.heroes.filter((hero) => {
-          return combo.includes(hero.name);
-        });
-        urlHeroes.forEach((elem) => {
-          this.store.dispatch(new AddHeroAction(elem))
-        })
+        this.urlCombo = params.combo || '';
+        if(params.combo){
+          const combo = params.combo.split(',');
+          const urlHeroes = this.heroes.filter((hero) => {
+            return combo.includes(hero.name);
+          });
+          urlHeroes.forEach((elem) => {
+            this.store.dispatch(new AddHeroAction(elem))
+          })
+        }
       });
     });
     this.store.pipe(select(SimulatorQuery.getSimulatorSelectedHeroes)).subscribe((list) => {
@@ -60,7 +72,6 @@ export class ComboCreatorComponent implements OnInit {
       this.store.dispatch(new AddHeroAction(value));
       if(!this.urlCombo.includes(value.name)){
         let query = this.urlCombo;
-        console.log([...this.urlCombo.split(','), value.name]);
         if(this.urlCombo.length > 0){
           if(this.urlCombo.split(',').length <= 10){
             query =  [...this.urlCombo.split(','), value.name].join(',');
@@ -96,5 +107,20 @@ export class ComboCreatorComponent implements OnInit {
       queryParamsHandling: 'merge'
     });
   }
+
+  saveComboToLink(){
+    //window.location.origin
+    this.bitlyService.shortenLink("https://cr-tips.com" + this.router.url).subscribe((data) => {
+      this.clipboardService.copyFromContent(data.link);
+      this.notification.success('Copied', 'Successfully copied a shorten link to your clipboard');
+    }, (err) => {
+      console.error(err);
+    })
+  }
+
+  saveComboToPicture(){
+
+  }
+
 
 }

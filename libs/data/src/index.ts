@@ -6,3 +6,4 @@ export * from './lib/DisplayedTip';
 export * from './lib/Race';
 export * from './lib/Class';
 export * from './lib/Combo';
+export * from './lib/ShortenLink';

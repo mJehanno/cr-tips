@@ -21,6 +21,6 @@ export interface Combo{
     punisher?: number;
     warrior?: number;
     druid?: number;
-    protector?:number;
+    tank?:number;
     demonPunisher?: number;
 }
