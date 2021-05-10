@@ -46,7 +46,7 @@
     "core-js": "^2.6.10",
     "firebase": "^6.6.2",
     "firebase-admin": "^8.8.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "ng-zorro-antd": "^8.5.2",
     "ngrx-store-localstorage": "^8.0.0",
     "ngx-clipboard": "^12.3.0",
